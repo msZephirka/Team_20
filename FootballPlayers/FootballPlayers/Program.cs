@@ -8,6 +8,24 @@ namespace FootballPlayers
 {
     class Program
     {
+        enum Roles
+        {
+            Goalkeeper,
+            Quarterback,
+            Halfback,
+            Forward
+        };
+
+        struct Football_players
+        {
+            String Surname;
+            DateTime Birthday;
+            String PlaceOfBorn;
+            Roles Role;
+            int CountGames;
+            int CountYellowLabel;
+        }
+
         static void Main(string[] args)
         {
         }

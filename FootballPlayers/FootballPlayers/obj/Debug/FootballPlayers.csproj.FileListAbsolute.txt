@@ -1,0 +1,7 @@
+D:\Мои документы\GitHub\Team_20\FootballPlayers\FootballPlayers\bin\Debug\FootballPlayers.exe.config
+D:\Мои документы\GitHub\Team_20\FootballPlayers\FootballPlayers\bin\Debug\FootballPlayers.exe
+D:\Мои документы\GitHub\Team_20\FootballPlayers\FootballPlayers\bin\Debug\FootballPlayers.pdb
+D:\Мои документы\GitHub\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.csprojAssemblyReference.cache
+D:\Мои документы\GitHub\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.csproj.CoreCompileInputs.cache
+D:\Мои документы\GitHub\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.exe
+D:\Мои документы\GitHub\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.pdb
