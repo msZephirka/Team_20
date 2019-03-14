@@ -5,3 +5,10 @@ D:\Мои документы\GitHub\Team_20\FootballPlayers\FootballPlayers\obj\
 D:\Мои документы\GitHub\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.csproj.CoreCompileInputs.cache
 D:\Мои документы\GitHub\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.exe
 D:\Мои документы\GitHub\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.pdb
+D:\GitHub\Team_20\FootballPlayers\FootballPlayers\bin\Debug\FootballPlayers.exe.config
+D:\GitHub\Team_20\FootballPlayers\FootballPlayers\bin\Debug\FootballPlayers.exe
+D:\GitHub\Team_20\FootballPlayers\FootballPlayers\bin\Debug\FootballPlayers.pdb
+D:\GitHub\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.csprojResolveAssemblyReference.cache
+D:\GitHub\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.csproj.CoreCompileInputs.cache
+D:\GitHub\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.exe
+D:\GitHub\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.pdb
