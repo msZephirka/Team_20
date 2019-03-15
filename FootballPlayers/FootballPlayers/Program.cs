@@ -42,7 +42,7 @@ namespace FootballPlayers
                 if (Regex.IsMatch(str, @"\d{2}\.\d{2}\.\d{4}")) return true;
                 try
                 {
-                    DateTime date = Convert.ToDateTime(Console.ReadLine());
+                    DateTime date = Convert.ToDateTime(str);
                     TimeSpan dt = DateTime.Now.Subtract(date);
                     int year = new DateTime(dt.Ticks).Year - 1;
                     if (year < 16 || year > 45)
@@ -85,11 +85,12 @@ namespace FootballPlayers
 
                 //Дата рождения
                 Console.WriteLine("Введите дату рождения в формате dd.mm.yyyy: ");
-                if (DateIsValid(Console.ReadLine()))
+                string date = Console.ReadLine();
+                if (DateIsValid(date))
                 {
-                    Birthday = Convert.ToDateTime(Console.ReadLine());
-                    return false;
+                    Birthday = Convert.ToDateTime(date);
                 }
+                else return false;
                     
                 
                 //Место рождения
