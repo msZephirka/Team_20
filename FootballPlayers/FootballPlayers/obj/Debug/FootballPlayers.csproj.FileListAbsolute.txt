@@ -12,3 +12,10 @@ D:\GitHub\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.cspr
 D:\GitHub\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.csproj.CoreCompileInputs.cache
 D:\GitHub\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.exe
 D:\GitHub\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.pdb
+C:\Users\Алиса\Desktop\study\Team_20\FootballPlayers\FootballPlayers\bin\Debug\FootballPlayers.exe.config
+C:\Users\Алиса\Desktop\study\Team_20\FootballPlayers\FootballPlayers\bin\Debug\FootballPlayers.exe
+C:\Users\Алиса\Desktop\study\Team_20\FootballPlayers\FootballPlayers\bin\Debug\FootballPlayers.pdb
+C:\Users\Алиса\Desktop\study\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.csprojAssemblyReference.cache
+C:\Users\Алиса\Desktop\study\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.csproj.CoreCompileInputs.cache
+C:\Users\Алиса\Desktop\study\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.exe
+C:\Users\Алиса\Desktop\study\Team_20\FootballPlayers\FootballPlayers\obj\Debug\FootballPlayers.pdb

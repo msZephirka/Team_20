@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -32,6 +33,17 @@ namespace FootballPlayers
             {
                 return string.IsNullOrEmpty(str) && ((!Regex.IsMatch(str, @"^[A-Za-z]$")));// || !Regex.IsMatch(str, @"^[А-Яа-я]$")));
             }
+            
+            //Конструктор структуры
+            public Football_players(String Surname, DateTime Birthday, String PlaceOfBorn, Roles Role, int CountGames, int CountYellowLabel)
+            {
+                this.Surname = Surname;
+                this.Birthday = Birthday;
+                this.PlaceOfBorn = PlaceOfBorn;
+                this.Role = Role;
+                this.CountGames = CountGames;
+                this.CountYellowLabel = CountYellowLabel;
+            }
             // Метод для добавления нового футболиста 
             public bool AddNewElement()
             {
@@ -51,7 +63,7 @@ namespace FootballPlayers
                 {
                     Birthday = Convert.ToDateTime(Console.ReadLine());
                     TimeSpan dt = DateTime.Now.Subtract(Birthday);
-                    int year = new DateTime(dt.Ticks).Year-1;
+                    int year = new DateTime(dt.Ticks).Year - 1;
                     if (year < 16 || year > 45)
                     {
                         Console.WriteLine("Футболист должен быть старше 16 и младше 40");
@@ -136,12 +148,34 @@ namespace FootballPlayers
 
                 return true;
             }
+
+            //Метод для вывода полного списка
+            public void OutFullList(List<Football_players> players)
+            {
+                Console.WriteLine("|Фамилия\t||Дата рождения\t||Место рождения\t||Амплуа\t|" +
+                        "|Количество игр||Количество желтых карт|");
+                foreach (Football_players player in players)
+                {
+                    Console.Write("|{0,-15}|", player.Surname);
+                    Console.Write("|{0,-14}|", player.Birthday.ToString("MM/dd/yyyy"));
+                    Console.Write("|{0,-22}|", player.PlaceOfBorn);
+                    Console.Write("|{0,-14}|", player.Role);
+                    Console.Write("|{0,-14}|", player.CountGames);
+                    Console.Write("|{0,-22}|", player.CountYellowLabel);
+                    Console.Write("\n");
+                }
+            }
         }
-    
+
 
         static void Main(string[] args)
         {
-            
+            List<Football_players> football_Players = new List<Football_players>();
+            football_Players.Add(new Football_players("Markov", new DateTime(1997, 1, 25), "Cheboksary", Roles.Forward, 3, 1));
+            football_Players.Add(new Football_players("Ivanov", new DateTime(1997, 10, 13), "Cheboksary", Roles.Forward, 3, 1));
+            football_Players.Add(new Football_players("Fedorov", new DateTime(1997, 11, 10), "Cheboksary", Roles.Forward, 3, 1));
+            Football_players pl = new Football_players();
+            pl.OutFullList(football_Players);
         }
     }
 }
