@@ -39,7 +39,7 @@ namespace FootballPlayers
             //ограничения для даты рождения
             public static bool DateIsValid(string str)
             {
-                if (Regex.IsMatch(str, @"\d{2}.\d{2}.\d{4}")) return true;
+                if (Regex.IsMatch(str, @"\d{2}\.\d{2}\.\d{4}")) return true;
                 try
                 {
                     DateTime date = Convert.ToDateTime(Console.ReadLine());
@@ -88,6 +88,7 @@ namespace FootballPlayers
                 if (DateIsValid(Console.ReadLine()))
                 {
                     Birthday = Convert.ToDateTime(Console.ReadLine());
+                    return false;
                 }
                     
                 
