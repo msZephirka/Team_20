@@ -39,24 +39,31 @@ namespace FootballPlayers
             //ограничения для даты рождения
             public static bool DateIsValid(string str)
             {
-                if (Regex.IsMatch(str, @"\d{2}\.\d{2}\.\d{4}")) return true;
-                try
+                if (Regex.IsMatch(str, @"\d{2}\.\d{2}\.\d{4}"))
                 {
-                    DateTime date = Convert.ToDateTime(str);
-                    TimeSpan dt = DateTime.Now.Subtract(date);
-                    int year = new DateTime(dt.Ticks).Year - 1;
-                    if (year < 16 || year > 45)
+                    try
                     {
-                        Console.WriteLine("Футболист должен быть старше 16 и младше 40");
+                        DateTime date = Convert.ToDateTime(str);
+                        TimeSpan dt = DateTime.Now.Subtract(date);
+                        int year = new DateTime(dt.Ticks).Year - 1;
+                        if (year < 16 || year > 45)
+                        {
+                            Console.WriteLine("Футболист должен быть старше 16 и младше 40");
+                            return false;
+                        }
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Неправильно ввели дату рождения");
                         return false;
                     }
+                    return true;
                 }
-                catch
+                else
                 {
-                    Console.WriteLine("Неправильно ввели дату рождения");
-                    return false;
+                    Console.WriteLine("Неправильно ввели дату рождения"); return false;
                 }
-                return true;
+                
 
             }
             
