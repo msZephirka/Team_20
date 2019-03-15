@@ -29,11 +29,7 @@ namespace FootballPlayers
             int CountGames;         //Количество игр
             int CountYellowLabel;   //Количество желтых карточек
 
-<<<<<<< HEAD
-            public static bool StringIsValid(string str)
-            {
-                return string.IsNullOrEmpty(str) && ((!Regex.IsMatch(str, @"^[A-Za-z]$")));// || !Regex.IsMatch(str, @"^[А-Яа-я]$")));
-=======
+
             //признак, что в строке только русские буквы
             public static bool StringIsValid(string str)
             {
@@ -62,8 +58,6 @@ namespace FootballPlayers
                     return false;
                 }
                 return true;
-
->>>>>>> a72c77f7c2d878f3e7c658d8bdc7e5f7dbca4411
             }
             
             //Конструктор структуры
@@ -82,11 +76,7 @@ namespace FootballPlayers
                 //Фамилия
                 Console.WriteLine("Введите фамилию футболиста: ");
                 Surname = Console.ReadLine();
-<<<<<<< HEAD
                 if (StringIsValid(Surname))
-=======
-                if (!StringIsValid(Surname))
->>>>>>> a72c77f7c2d878f3e7c658d8bdc7e5f7dbca4411
                 {
                     Console.WriteLine("Фамилия может содержать только буквы русского алфавита");
                     return false;
@@ -95,28 +85,7 @@ namespace FootballPlayers
 
                 //Дата рождения
                 Console.WriteLine("Введите дату рождения в формате dd.mm.yyyy: ");
-<<<<<<< HEAD
-                try
-                {
-                    Birthday = Convert.ToDateTime(Console.ReadLine());
-                    TimeSpan dt = DateTime.Now.Subtract(Birthday);
-                    int year = new DateTime(dt.Ticks).Year - 1;
-                    if (year < 16 || year > 45)
-                    {
-                        Console.WriteLine("Футболист должен быть старше 16 и младше 40");
-                        return false;
-                    }
-                }
-                catch
-                {
-                    Console.WriteLine("Неправильно ввели дату рождения");
-                    return false;
-                }
 
-                //Место рождения
-                Console.WriteLine("Введите место рождения: ");
-                PlaceOfBorn = Console.ReadLine();
-=======
                 if (DateIsValid(Console.ReadLine()))
                 {
                     Birthday = Convert.ToDateTime(Console.ReadLine());
@@ -131,7 +100,6 @@ namespace FootballPlayers
                     Console.WriteLine("Место рождения может содержать только буквы русского алфавита");
                     return false;
                 }
->>>>>>> a72c77f7c2d878f3e7c658d8bdc7e5f7dbca4411
 
                 //Амплуа
                 Console.WriteLine("Введите амплуа [0 - вратарь, 1 - защитник, 2 - полузащитник, 3 - нападающий]");
@@ -229,11 +197,7 @@ namespace FootballPlayers
             football_Players.Add(new Football_players("Fedorov", new DateTime(1997, 11, 10), "Cheboksary", Roles.Forward, 3, 1));
             Football_players pl = new Football_players();
             pl.OutFullList(football_Players);
-<<<<<<< HEAD
-            
-=======
             pl.AddNewElement();
->>>>>>> a72c77f7c2d878f3e7c658d8bdc7e5f7dbca4411
         }
     }
 }
