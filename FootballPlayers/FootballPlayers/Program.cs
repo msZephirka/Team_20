@@ -19,8 +19,20 @@ namespace FootballPlayers
             Forward         //нападающий
         };
 
-        //Описание структуры, описывающей футболистов
-        struct Football_players
+        //Описание структуры, описывающей фильтр 
+        struct Football_players_filter
+        {
+            String F_Surname;         //Фильтр по фамилии
+            DateTime F_Birthday;      //Фильр по дате рождения
+            String F_PlaceOfBorn;     //Фильтр по месту рождения
+            Roles F_Role;             //Фильтр по амплуа
+            int F_CountGames;         //Фильтр по количеству игр
+            int F_CountYellowLabel;   //Фильтр по Количеству желтых карточек
+        }
+
+
+            //Описание структуры, описывающей футболистов
+            struct Football_players
         {
             String Surname;         //Фамилия
             DateTime Birthday;      //Дата рождения
