@@ -9,15 +9,17 @@ using System.Threading.Tasks;
 namespace FootballPlayers
 {
     class Program
-    {
-        //Возможные значения для поля амплуа
-        enum Roles
+    {   
+        static void Main(string[] args)
         {
-            Goalkeeper = 1,     //вратарь
-            Quarterback,    //защитник
-            Halfback,       //полузащитник
-            Forward         //нападающий
-        };
+            List<Football_players> football_Players = new List<Football_players>();
+            football_Players.Add(new Football_players("Markov", new DateTime(1997, 1, 25), "Cheboksary", Roles.Forward, 3, 1));
+            football_Players.Add(new Football_players("Ivanov", new DateTime(1997, 10, 13), "Cheboksary", Roles.Forward, 3, 1));
+            football_Players.Add(new Football_players("Fedorov", new DateTime(1997, 11, 10), "Cheboksary", Roles.Forward, 3, 1));
+            Football_players pl = new Football_players();
+            pl.OutFullList(football_Players);
+            pl.AddNewElement();
+        }
 
         //Описание структуры, описывающей фильтр 
         struct Football_players_filter
@@ -31,8 +33,8 @@ namespace FootballPlayers
         }
 
 
-            //Описание структуры, описывающей футболистов
-            struct Football_players
+        //Описание структуры, описывающей футболистов
+        struct Football_players
         {
             String Surname;         //Фамилия
             DateTime Birthday;      //Дата рождения
@@ -71,7 +73,7 @@ namespace FootballPlayers
                 }
                 return true;
             }
-            
+
             //Конструктор структуры
             public Football_players(String Surname, DateTime Birthday, String PlaceOfBorn, Roles Role, int CountGames, int CountYellowLabel)
             {
@@ -88,7 +90,7 @@ namespace FootballPlayers
                 //Фамилия
                 Console.WriteLine("Введите фамилию футболиста: ");
                 Surname = Console.ReadLine();
-                if (StringIsValid(Surname))
+                if (!StringIsValid(Surname))
                 {
                     Console.WriteLine("Фамилия может содержать только буквы русского алфавита");
                     return false;
@@ -102,8 +104,8 @@ namespace FootballPlayers
                 {
                     Birthday = Convert.ToDateTime(Console.ReadLine());
                 }
-                    
-                
+
+
                 //Место рождения
                 Console.WriteLine("Введите место рождения: ");
                 PlaceOfBorn = Console.ReadLine();
@@ -200,16 +202,14 @@ namespace FootballPlayers
             }
         }
 
-
-        static void Main(string[] args)
+        //Возможные значения для поля амплуа
+        enum Roles
         {
-            List<Football_players> football_Players = new List<Football_players>();
-            football_Players.Add(new Football_players("Markov", new DateTime(1997, 1, 25), "Cheboksary", Roles.Forward, 3, 1));
-            football_Players.Add(new Football_players("Ivanov", new DateTime(1997, 10, 13), "Cheboksary", Roles.Forward, 3, 1));
-            football_Players.Add(new Football_players("Fedorov", new DateTime(1997, 11, 10), "Cheboksary", Roles.Forward, 3, 1));
-            Football_players pl = new Football_players();
-            pl.OutFullList(football_Players);
-            pl.AddNewElement();
-        }
+            Goalkeeper = 1,     //вратарь
+            Quarterback,    //защитник
+            Halfback,       //полузащитник
+            Forward         //нападающий
+        };
+
     }
 }
