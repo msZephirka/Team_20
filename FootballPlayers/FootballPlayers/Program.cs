@@ -10,46 +10,46 @@ namespace FootballPlayers
 {
     class Program
     {
-        //Возможные значения для поля амплуа
+        //Р’РѕР·РјРѕР¶РЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ РґР»СЏ РїРѕР»СЏ Р°РјРїР»СѓР°
         enum Roles
         {
-            Goalkeeper = 1,     //вратарь
-            Quarterback,    //защитник
-            Halfback,       //полузащитник
-            Forward         //нападающий
+            Goalkeeper = 1,     //РІСЂР°С‚Р°СЂСЊ
+            Quarterback,    //Р·Р°С‰РёС‚РЅРёРє
+            Halfback,       //РїРѕР»СѓР·Р°С‰РёС‚РЅРёРє
+            Forward         //РЅР°РїР°РґР°СЋС‰РёР№
         };
 
-        //Описание структуры, описывающей фильтр 
+        //РћРїРёСЃР°РЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹, РѕРїРёСЃС‹РІР°СЋС‰РµР№ С„РёР»СЊС‚СЂ 
         struct Football_players_filter
         {
-            String F_Surname;         //Фильтр по фамилии
-            DateTime F_Birthday;      //Фильр по дате рождения
-            String F_PlaceOfBorn;     //Фильтр по месту рождения
-            Roles F_Role;             //Фильтр по амплуа
-            int CountGames;         //Фильтр по количеству игр
-            int CountYellowLabel;   //Фильтр по Количеству желтых карточек
+            String F_Surname;         //Р¤РёР»СЊС‚СЂ РїРѕ С„Р°РјРёР»РёРё
+            DateTime F_Birthday;      //Р¤РёР»СЊСЂ РїРѕ РґР°С‚Рµ СЂРѕР¶РґРµРЅРёСЏ
+            String F_PlaceOfBorn;     //Р¤РёР»СЊС‚СЂ РїРѕ РјРµСЃС‚Сѓ СЂРѕР¶РґРµРЅРёСЏ
+            Roles F_Role;             //Р¤РёР»СЊС‚СЂ РїРѕ Р°РјРїР»СѓР°
+            int CountGames;         //Р¤РёР»СЊС‚СЂ РїРѕ РєРѕР»РёС‡РµСЃС‚РІСѓ РёРіСЂ
+            int CountYellowLabel;   //Р¤РёР»СЊС‚СЂ РїРѕ РљРѕР»РёС‡РµСЃС‚РІСѓ Р¶РµР»С‚С‹С… РєР°СЂС‚РѕС‡РµРє
         }
 
 
-            //Описание структуры, описывающей футболистов
+            //РћРїРёСЃР°РЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹, РѕРїРёСЃС‹РІР°СЋС‰РµР№ С„СѓС‚Р±РѕР»РёСЃС‚РѕРІ
             struct Football_players
         {
-            String Surname;         //Фамилия
-            DateTime Birthday;      //Дата рождения
-            String PlaceOfBorn;     //Место рождения
-            Roles Role;             //Амплуа
-            int CountGames;         //Количество игр
-            int CountYellowLabel;   //Количество желтых карточек
+            String Surname;         //Р¤Р°РјРёР»РёСЏ
+            DateTime Birthday;      //Р”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ
+            String PlaceOfBorn;     //РњРµСЃС‚Рѕ СЂРѕР¶РґРµРЅРёСЏ
+            Roles Role;             //РђРјРїР»СѓР°
+            int CountGames;         //РљРѕР»РёС‡РµСЃС‚РІРѕ РёРіСЂ
+            int CountYellowLabel;   //РљРѕР»РёС‡РµСЃС‚РІРѕ Р¶РµР»С‚С‹С… РєР°СЂС‚РѕС‡РµРє
 
 
-            //признак, что в строке только русские буквы
+            //РїСЂРёР·РЅР°Рє, С‡С‚Рѕ РІ СЃС‚СЂРѕРєРµ С‚РѕР»СЊРєРѕ СЂСѓСЃСЃРєРёРµ Р±СѓРєРІС‹
             public static bool StringIsValid(string str)
             {
-                if (Regex.IsMatch(str, @"[А-Яа-я]$")) return true;
+                if (Regex.IsMatch(str, @"[Рђ-РЇР°-СЏ]$")) return true;
                 else return false;
             }
 
-            //ограничения для даты рождения
+            //РѕРіСЂР°РЅРёС‡РµРЅРёСЏ РґР»СЏ РґР°С‚С‹ СЂРѕР¶РґРµРЅРёСЏ
             public static bool DateIsValid(string str)
             {
                 if (Regex.IsMatch(str, @"\d{2}.\d{2}.\d{4}")) return true;
@@ -60,19 +60,19 @@ namespace FootballPlayers
                     int year = new DateTime(dt.Ticks).Year - 1;
                     if (year < 16 || year > 45)
                     {
-                        Console.WriteLine("Футболист должен быть старше 16 и младше 40");
+                        Console.WriteLine("Р¤СѓС‚Р±РѕР»РёСЃС‚ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ СЃС‚Р°СЂС€Рµ 16 Рё РјР»Р°РґС€Рµ 40");
                         return false;
                     }
                 }
                 catch
                 {
-                    Console.WriteLine("Неправильно ввели дату рождения");
+                    Console.WriteLine("РќРµРїСЂР°РІРёР»СЊРЅРѕ РІРІРµР»Рё РґР°С‚Сѓ СЂРѕР¶РґРµРЅРёСЏ");
                     return false;
                 }
                 return true;
             }
             
-            //Конструктор структуры
+            //РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃС‚СЂСѓРєС‚СѓСЂС‹
             public Football_players(String Surname, DateTime Birthday, String PlaceOfBorn, Roles Role, int CountGames, int CountYellowLabel)
             {
                 this.Surname = Surname;
@@ -82,21 +82,21 @@ namespace FootballPlayers
                 this.CountGames = CountGames;
                 this.CountYellowLabel = CountYellowLabel;
             }
-            // Метод для добавления нового футболиста 
+            // РњРµС‚РѕРґ РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ РЅРѕРІРѕРіРѕ С„СѓС‚Р±РѕР»РёСЃС‚Р° 
             public bool AddNewElement()
             {
-                //Фамилия
-                Console.WriteLine("Введите фамилию футболиста: ");
+                //Р¤Р°РјРёР»РёСЏ
+                Console.WriteLine("Р’РІРµРґРёС‚Рµ С„Р°РјРёР»РёСЋ С„СѓС‚Р±РѕР»РёСЃС‚Р°: ");
                 Surname = Console.ReadLine();
                 if (StringIsValid(Surname))
                 {
-                    Console.WriteLine("Фамилия может содержать только буквы русского алфавита");
+                    Console.WriteLine("Р¤Р°РјРёР»РёСЏ РјРѕР¶РµС‚ СЃРѕРґРµСЂР¶Р°С‚СЊ С‚РѕР»СЊРєРѕ Р±СѓРєРІС‹ СЂСѓСЃСЃРєРѕРіРѕ Р°Р»С„Р°РІРёС‚Р°");
                     return false;
                 }
 
 
-                //Дата рождения
-                Console.WriteLine("Введите дату рождения в формате dd.mm.yyyy: ");
+                //Р”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ
+                Console.WriteLine("Р’РІРµРґРёС‚Рµ РґР°С‚Сѓ СЂРѕР¶РґРµРЅРёСЏ РІ С„РѕСЂРјР°С‚Рµ dd.mm.yyyy: ");
 
                 if (DateIsValid(Console.ReadLine()))
                 {
@@ -104,22 +104,22 @@ namespace FootballPlayers
                 }
                     
                 
-                //Место рождения
-                Console.WriteLine("Введите место рождения: ");
+                //РњРµСЃС‚Рѕ СЂРѕР¶РґРµРЅРёСЏ
+                Console.WriteLine("Р’РІРµРґРёС‚Рµ РјРµСЃС‚Рѕ СЂРѕР¶РґРµРЅРёСЏ: ");
                 PlaceOfBorn = Console.ReadLine();
                 if (!StringIsValid(PlaceOfBorn))
                 {
-                    Console.WriteLine("Место рождения может содержать только буквы русского алфавита");
+                    Console.WriteLine("РњРµСЃС‚Рѕ СЂРѕР¶РґРµРЅРёСЏ РјРѕР¶РµС‚ СЃРѕРґРµСЂР¶Р°С‚СЊ С‚РѕР»СЊРєРѕ Р±СѓРєРІС‹ СЂСѓСЃСЃРєРѕРіРѕ Р°Р»С„Р°РІРёС‚Р°");
                     return false;
                 }
 
-                //Амплуа
-                Console.WriteLine("Введите амплуа [0 - вратарь, 1 - защитник, 2 - полузащитник, 3 - нападающий]");
+                //РђРјРїР»СѓР°
+                Console.WriteLine("Р’РІРµРґРёС‚Рµ Р°РјРїР»СѓР° [0 - РІСЂР°С‚Р°СЂСЊ, 1 - Р·Р°С‰РёС‚РЅРёРє, 2 - РїРѕР»СѓР·Р°С‰РёС‚РЅРёРє, 3 - РЅР°РїР°РґР°СЋС‰РёР№]");
                 int amplua;
                 bool isNum = int.TryParse(Console.ReadLine(), out amplua);
                 if (!isNum)
                 {
-                    Console.WriteLine("Неправильно ввели амплуа");
+                    Console.WriteLine("РќРµРїСЂР°РІРёР»СЊРЅРѕ РІРІРµР»Рё Р°РјРїР»СѓР°");
                     return false;
                 }
                 switch (amplua)
@@ -137,12 +137,12 @@ namespace FootballPlayers
                         Role = Roles.Forward;
                         break;
                     default:
-                        Console.WriteLine("Неправильно ввели амплуа");
+                        Console.WriteLine("РќРµРїСЂР°РІРёР»СЊРЅРѕ РІРІРµР»Рё Р°РјРїР»СѓР°");
                         return false;
                 }
 
-                //Количество игр
-                Console.WriteLine("Введите количество игр");
+                //РљРѕР»РёС‡РµСЃС‚РІРѕ РёРіСЂ
+                Console.WriteLine("Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ РёРіСЂ");
 
                 try
                 {
@@ -150,43 +150,43 @@ namespace FootballPlayers
                     if (countGames > 0) CountGames = countGames;
                     else
                     {
-                        Console.WriteLine("Количество игр не может быть отрицательным");
+                        Console.WriteLine("РљРѕР»РёС‡РµСЃС‚РІРѕ РёРіСЂ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рј");
                         return false;
                     }
 
                 }
                 catch
                 {
-                    Console.WriteLine("Количество игр должно быть числом");
+                    Console.WriteLine("РљРѕР»РёС‡РµСЃС‚РІРѕ РёРіСЂ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ С‡РёСЃР»РѕРј");
                     return false;
                 }
-                //Количество жёлтых карточек 
-                Console.WriteLine("Введите количество жёлтых карточек");
+                //РљРѕР»РёС‡РµСЃС‚РІРѕ Р¶С‘Р»С‚С‹С… РєР°СЂС‚РѕС‡РµРє 
+                Console.WriteLine("Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ Р¶С‘Р»С‚С‹С… РєР°СЂС‚РѕС‡РµРє");
                 try
                 {
                     int countYellowLabel = Convert.ToInt32(Console.ReadLine());
                     if (countYellowLabel > 0) CountYellowLabel = countYellowLabel;
                     else
                     {
-                        Console.WriteLine("Количество желтых карточек не может быть отрицательным");
+                        Console.WriteLine("РљРѕР»РёС‡РµСЃС‚РІРѕ Р¶РµР»С‚С‹С… РєР°СЂС‚РѕС‡РµРє РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рј");
                         return false;
                     }
 
                 }
                 catch
                 {
-                    Console.WriteLine("Количество желтых карточек должно быть числом");
+                    Console.WriteLine("РљРѕР»РёС‡РµСЃС‚РІРѕ Р¶РµР»С‚С‹С… РєР°СЂС‚РѕС‡РµРє РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ С‡РёСЃР»РѕРј");
                     return false;
                 }
 
                 return true;
             }
 
-            //Метод для вывода полного списка
+            //РњРµС‚РѕРґ РґР»СЏ РІС‹РІРѕРґР° РїРѕР»РЅРѕРіРѕ СЃРїРёСЃРєР°
             public void OutFullList(List<Football_players> players)
             {
-                Console.WriteLine("|Фамилия\t||Дата рождения\t||Место рождения\t||Амплуа\t|" +
-                        "|Количество игр||Количество желтых карт|");
+                Console.WriteLine("|Р¤Р°РјРёР»РёСЏ\t||Р”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ\t||РњРµСЃС‚Рѕ СЂРѕР¶РґРµРЅРёСЏ\t||РђРјРїР»СѓР°\t|" +
+                        "|РљРѕР»РёС‡РµСЃС‚РІРѕ РёРіСЂ||РљРѕР»РёС‡РµСЃС‚РІРѕ Р¶РµР»С‚С‹С… РєР°СЂС‚|");
                 foreach (Football_players player in players)
                 {
                     Console.Write("|{0,-15}|", player.Surname);
