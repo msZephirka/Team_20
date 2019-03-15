@@ -26,8 +26,8 @@ namespace FootballPlayers
             DateTime F_Birthday;      //Фильр по дате рождения
             String F_PlaceOfBorn;     //Фильтр по месту рождения
             Roles F_Role;             //Фильтр по амплуа
-            int F_CountGames;         //Фильтр по количеству игр
-            int F_CountYellowLabel;   //Фильтр по Количеству желтых карточек
+            int CountGames;         //Фильтр по количеству игр
+            int CountYellowLabel;   //Фильтр по Количеству желтых карточек
         }
 
 
@@ -52,31 +52,24 @@ namespace FootballPlayers
             //ограничения для даты рождения
             public static bool DateIsValid(string str)
             {
-                if (Regex.IsMatch(str, @"\d{2}\.\d{2}\.\d{4}"))
+                if (Regex.IsMatch(str, @"\d{2}.\d{2}.\d{4}")) return true;
+                try
                 {
-                    try
+                    DateTime date = Convert.ToDateTime(Console.ReadLine());
+                    TimeSpan dt = DateTime.Now.Subtract(date);
+                    int year = new DateTime(dt.Ticks).Year - 1;
+                    if (year < 16 || year > 45)
                     {
-                        DateTime date = Convert.ToDateTime(str);
-                        TimeSpan dt = DateTime.Now.Subtract(date);
-                        int year = new DateTime(dt.Ticks).Year - 1;
-                        if (year < 16 || year > 45)
-                        {
-                            Console.WriteLine("Футболист должен быть старше 16 и младше 40");
-                            return false;
-                        }
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Неправильно ввели дату рождения");
+                        Console.WriteLine("Футболист должен быть старше 16 и младше 40");
                         return false;
                     }
-                    return true;
                 }
-                else
+                catch
                 {
-                    Console.WriteLine("Неправильно ввели дату рождения"); 
+                    Console.WriteLine("Неправильно ввели дату рождения");
+                    return false;
+                }
                 return true;
-
             }
             
             //Конструктор структуры
@@ -104,12 +97,11 @@ namespace FootballPlayers
 
                 //Дата рождения
                 Console.WriteLine("Введите дату рождения в формате dd.mm.yyyy: ");
-                string date = Console.ReadLine();
-                if (DateIsValid(date))
+
+                if (DateIsValid(Console.ReadLine()))
                 {
-                    Birthday = Convert.ToDateTime(date);
+                    Birthday = Convert.ToDateTime(Console.ReadLine());
                 }
-                else return false;
                     
                 
                 //Место рождения
