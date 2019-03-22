@@ -38,6 +38,7 @@ namespace FootballPlayers
                     case "1": // Ввод нового работника
                         Console.Clear();
                         Console.WriteLine("Ввод нового футболиста: \n");
+                        Football_players.AddNewElement(football_Players);
                         break;
 
                     case "2": // Вывод работников
@@ -90,30 +91,6 @@ namespace FootballPlayers
                 if (Regex.IsMatch(str, @"[А-Яа-я]$")) return true;
                 else return false;
             }
-
-            // Ограничения для даты рождения
-            public static bool DateIsValid(string str)
-            {
-                if (Regex.IsMatch(str, @"\d{2}.\d{2}.\d{4}")) return true;
-                try
-                {
-                    DateTime date = Convert.ToDateTime(Console.ReadLine());
-                    TimeSpan dt = DateTime.Now.Subtract(date);
-                    int year = new DateTime(dt.Ticks).Year - 1;
-                    if (year < 16 || year > 45)
-                    {
-                        Console.WriteLine("Футболист должен быть старше 16 и младше 40");
-                        return false;
-                    }
-                }
-                catch
-                {
-                    Console.WriteLine("Неправильно ввели дату рождения");
-                    return false;
-                }
-                return true;
-            }
-
             // Конструктор структуры
             public Football_players(String Surname, DateTime Birthday, String PlaceOfBorn, Roles Role, int CountGames, int CountYellowLabel)
             {
@@ -126,102 +103,103 @@ namespace FootballPlayers
             }
 
             // Метод для добавления нового футболиста 
-            public bool AddNewElement()
+            public static void AddNewElement(List<Football_players> players)
             {
+                Football_players player = new Football_players();
                 // Фамилия
-                Console.WriteLine("Введите фамилию футболиста: ");
-                Surname = Console.ReadLine();
-                if (!StringIsValid(Surname))
+                 Console.WriteLine("Введите фамилию футболиста: ");
+                player.Surname = Console.ReadLine();
+                while (!StringIsValid(player.Surname))
                 {
-                    Console.WriteLine("Фамилия может содержать только буквы русского алфавита");
-                    return false;
+                    Console.WriteLine("Фамилия может содержать только буквы русского алфавита. Повторите ввод:");
+                    player.Surname = Console.ReadLine();
                 }
 
                 // Дата рождения
                 Console.WriteLine("Введите дату рождения в формате dd.mm.yyyy: ");
-
-                if (DateIsValid(Console.ReadLine()))
+                string str = Console.ReadLine();
+                while (!Regex.IsMatch(str, @"\d{2}.\d{2}.\d{4}"))
                 {
-                    Birthday = Convert.ToDateTime(Console.ReadLine());
+                    try
+                    {
+                        DateTime date = Convert.ToDateTime(str);
+                        TimeSpan dt = DateTime.Now.Subtract(date);
+                        int year = new DateTime(dt.Ticks).Year - 1;
+                        if (year < 16 || year > 45)
+                        {
+                            Console.WriteLine("Футболист должен быть старше 16 и младше 40. Повтрите ввод: ");
+                            str = Console.ReadLine();
+                        }
+                        player.Birthday = date;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Неправильно ввели дату рождения. Повтрите ввод: ");
+                        str = Console.ReadLine();
+                    }
                 }
-
 
                 // Место рождения
                 Console.WriteLine("Введите место рождения: ");
-                PlaceOfBorn = Console.ReadLine();
-                if (!StringIsValid(PlaceOfBorn))
+                player.PlaceOfBorn = Console.ReadLine();
+                while (!StringIsValid(player.PlaceOfBorn))
                 {
-                    Console.WriteLine("Место рождения может содержать только буквы русского алфавита");
-                    return false;
+                    Console.WriteLine("Место рождения может содержать только буквы русского алфавита. Повторите ввод:");
+                    player.PlaceOfBorn = Console.ReadLine();
                 }
 
                 // Амплуа
                 Console.WriteLine("Введите амплуа [0 - вратарь, 1 - защитник, 2 - полузащитник, 3 - нападающий]");
                 int amplua;
                 bool isNum = int.TryParse(Console.ReadLine(), out amplua);
-                if (!isNum)
+                while (!isNum)
                 {
-                    Console.WriteLine("Неправильно ввели амплуа");
-                    return false;
-                }
-                switch (amplua)
-                {
-                    case 0:
-                        Role = Roles.Goalkeeper;
-                        break;
-                    case 1:
-                        Role = Roles.Quarterback;
-                        break;
-                    case 2:
-                        Role = Roles.Halfback;
-                        break;
-                    case 3:
-                        Role = Roles.Forward;
-                        break;
-                    default:
-                        Console.WriteLine("Неправильно ввели амплуа");
-                        return false;
+                    Console.WriteLine("Неправильно ввели амплуа. Повторите ввод:");
+                    isNum = int.TryParse(Console.ReadLine(), out amplua);
+
+                    switch (amplua)
+                    {
+                        case 0:
+                            player.Role = Roles.Goalkeeper;
+                            break;
+                        case 1:
+                            player.Role = Roles.Quarterback;
+                            break;
+                        case 2:
+                            player.Role = Roles.Halfback;
+                            break;
+                        case 3:
+                            player.Role = Roles.Forward;
+                            break;
+                        default:
+                            Console.WriteLine("Неправильно ввели амплуа. Повторите ввод:");
+                            isNum = int.TryParse(Console.ReadLine(), out amplua);
+                            break;
+
+                    }
                 }
 
                 // Количество игр
                 Console.WriteLine("Введите количество игр");
+                int countGames = Convert.ToInt32(Console.ReadLine());
 
-                try
+                while (countGames < 0)
                 {
-                    int countGames = Convert.ToInt32(Console.ReadLine());
-                    if (countGames > 0) CountGames = countGames;
-                    else
-                    {
-                        Console.WriteLine("Количество игр не может быть отрицательным");
-                        return false;
-                    }
-
-                }
-                catch
-                {
-                    Console.WriteLine("Количество игр должно быть числом");
-                    return false;
+                    Console.WriteLine("Количество игр не может быть отрицательным. Повторите ввод: ");
+                    countGames = Convert.ToInt32(Console.ReadLine());
                 }
                 // Количество жёлтых карточек 
                 Console.WriteLine("Введите количество жёлтых карточек");
-                try
-                {
-                    int countYellowLabel = Convert.ToInt32(Console.ReadLine());
-                    if (countYellowLabel > 0) CountYellowLabel = countYellowLabel;
-                    else
-                    {
-                        Console.WriteLine("Количество желтых карточек не может быть отрицательным");
-                        return false;
-                    }
+                int countYellowLabel = Convert.ToInt32(Console.ReadLine());
 
-                }
-                catch
+                while (countYellowLabel < 0)
                 {
-                    Console.WriteLine("Количество желтых карточек должно быть числом");
-                    return false;
+                    Console.WriteLine("Количество игр не может быть отрицательным. Повторите ввод: ");
+                    countYellowLabel = Convert.ToInt32(Console.ReadLine());
                 }
 
-                return true;
+                players.Add(player);
+                Console.WriteLine("Футболист добавлен! Нажмите enter для возврата в меню");
             }
 
             // Метод для вывода полного списка
