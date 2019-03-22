@@ -14,7 +14,7 @@ namespace FootballPlayers
         {
             // Список футболистов
             List<Football_players> football_Players = new List<Football_players>();
-            Football_players_filter filter = new Football_players_filter();
+            Football_players.filter = new Football_players_filter(); 
             
             // Вводимое значение
             string ReadCh;
@@ -84,6 +84,7 @@ namespace FootballPlayers
             int CountGames;         // Количество игр
             int CountYellowLabel;   // Количество желтых карточек
 
+            public static Football_players_filter filter; // Фильтр
 
             // Признак, что в строке только русские буквы
             public static bool StringIsValid(string str)
@@ -229,6 +230,12 @@ namespace FootballPlayers
             Roles F_Role;             //Фильтр по амплуа
             int CountGames;         //Фильтр по количеству игр
             int CountYellowLabel;   //Фильтр по Количеству желтых карточек
+
+            // Добавление фильтра
+            public void AddFilter()
+            {
+
+            }
         }
 
         // Возможные значения для поля амплуа
