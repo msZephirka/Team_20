@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 namespace FootballPlayers
 {
     class Program
-    {   
+    {
         static void Main(string[] args)
         {
             // Список футболистов
             List<Football_players> football_Players = new List<Football_players>();
-            Football_players.filter = new Football_players_filter(); 
-            
+            Football_players.filter = new Football_players_filter();
+
             // Вводимое значение
             string ReadCh;
 
@@ -35,25 +35,28 @@ namespace FootballPlayers
                 // Выполнить выбранную команду
                 switch (ReadCh)
                 {
-                    case "1": // Ввод нового работника
+                    case "1": // Ввод нового футболиста
                         Console.Clear();
                         Console.WriteLine("Ввод нового футболиста: \n");
                         Football_players.AddNewElement(football_Players);
                         break;
 
-                    case "2": // Вывод работников
+                    case "2": // Вывод футболистов
                         Console.Clear();
                         Console.WriteLine("Вывод полного списка футболистов: ");
+                        Football_players.OutFullList(football_Players);
                         break;
 
                     case "3": // Ввод значений фильтра
                         Console.Clear();
                         Console.WriteLine("Ввод фильтра: ");
+                        Football_players.filter.AddFilter();
                         break;
 
-                    case "4": // Вывод отфильтрованного списка работников
+                    case "4": // Вывод отфильтрованного списка футболистов
                         Console.Clear();
                         Console.WriteLine("Вывод отфильтрованного списка футболистов: ");
+                        Football_players.OutFilterList(football_Players);
                         break;
 
                     default: // Выход из программы
@@ -65,15 +68,8 @@ namespace FootballPlayers
                 Console.ReadKey();
                 Console.Clear();
             } while (true);
-
-            /*football_Players.Add(new Football_players("Markov", new DateTime(1997, 1, 25), "Cheboksary", Roles.Forward, 3, 1));
-            football_Players.Add(new Football_players("Ivanov", new DateTime(1997, 10, 13), "Cheboksary", Roles.Forward, 3, 1));
-            football_Players.Add(new Football_players("Fedorov", new DateTime(1997, 11, 10), "Cheboksary", Roles.Forward, 3, 1));
-            Football_players pl = new Football_players();
-            pl.OutFullList(football_Players);
-            pl.AddNewElement();*/
         }
-                
+
         /// <summary>
         /// Футболисты
         /// </summary>
@@ -110,7 +106,7 @@ namespace FootballPlayers
             {
                 Football_players player = new Football_players();
                 // Фамилия
-                 Console.WriteLine("Введите фамилию футболиста: ");
+                Console.WriteLine("Введите фамилию футболиста: ");
                 player.Surname = Console.ReadLine();
                 while (!StringIsValid(player.Surname))
                 {
@@ -209,7 +205,7 @@ namespace FootballPlayers
             /// Вывод полного списка
             /// </summary>
             /// <param name="players"></param>
-            public void OutFullList(List<Football_players> players)
+            public static void OutFullList(List<Football_players> players)
             {
                 Console.WriteLine("|Фамилия\t||Дата рождения\t||Место рождения\t||Амплуа\t|" +
                         "|Количество игр||Количество желтых карт|");
@@ -232,12 +228,27 @@ namespace FootballPlayers
             public bool isChecked()
             {
                 // Проверка фамилии
-                
+                if ((filter.F_Surname != null) && (!this.Surname.Contains(filter.F_Surname)))
+                    return false;
                 // Проверка даты рождения
+                if ((filter.F_Birthday_min != null) && (this.Birthday < filter.F_Birthday_min))
+                    return false;
+                if ((filter.F_Birthday_max != null) && (this.Birthday < filter.F_Birthday_max))
+                    return false;
                 // Проверка места рождения
+                if ((filter.F_PlaceOfBorn != null) && (!this.PlaceOfBorn.Contains(filter.F_PlaceOfBorn)))
+                    return false;
                 // Проверка амплуа
+                if ((filter.F_Role != null) && (this.Role != filter.F_Role))
+                    return false;
                 // Проверка количества игр
+                if ((filter.CountGames != null) && (this.CountGames != filter.CountGames))
+                    return false;
                 // Проверка количетсва желтых карточек
+                if ((filter.CountYellowLabel != null) && (this.CountYellowLabel != filter.CountYellowLabel))
+                    return false;
+
+                // если поля удовлетворяют фильтру
                 return true;
             }
 
@@ -245,9 +256,17 @@ namespace FootballPlayers
             /// Вывод с применением фильтра
             /// </summary>
             /// <param name="players"></param>
-            public void OutFilterList(List<Football_players> players)
+            public static void OutFilterList(List<Football_players> players)
             {
-
+                List<Football_players> list = new List<Football_players>();
+                foreach (var player in players)
+                {
+                    if (player.isChecked())
+                    {
+                        list.Add(player);
+                    }
+                }
+                OutFullList(list);
             }
 
 
@@ -258,13 +277,13 @@ namespace FootballPlayers
         /// </summary>
         struct Football_players_filter
         {
-            String F_Surname;               //Фильтр по фамилии
-            DateTime F_Birthday_min;        //Фильр по дате рождения
-            DateTime F_Birthday_max;        //Фильр по дате рождения
-            String F_PlaceOfBorn;           //Фильтр по месту рождения
-            Roles F_Role;                   //Фильтр по амплуа
-            int CountGames;                 //Фильтр по количеству игр
-            int CountYellowLabel;           //Фильтр по Количеству желтых карточек
+            public String F_Surname;               //Фильтр по фамилии
+            public DateTime F_Birthday_min;        //Фильр по дате рождения
+            public DateTime F_Birthday_max;        //Фильр по дате рождения
+            public String F_PlaceOfBorn;           //Фильтр по месту рождения
+            public Roles F_Role;                   //Фильтр по амплуа
+            public int CountGames;                 //Фильтр по количеству игр
+            public int CountYellowLabel;           //Фильтр по Количеству желтых карточек
 
             // Добавление фильтра
             public void AddFilter()
