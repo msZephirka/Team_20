@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 namespace FootballPlayers
 {
     class Program
-    {   
+    {
         static void Main(string[] args)
         {
             // Список футболистов
             List<Football_players> football_Players = new List<Football_players>();
-            Football_players.filter = new Football_players_filter(); 
-            
+            Football_players.filter = new Football_players_filter();
+
             // Вводимое значение
             string ReadCh;
 
@@ -73,7 +73,7 @@ namespace FootballPlayers
             pl.OutFullList(football_Players);
             pl.AddNewElement();*/
         }
-                
+
         /// <summary>
         /// Футболисты
         /// </summary>
@@ -110,7 +110,7 @@ namespace FootballPlayers
             {
                 Football_players player = new Football_players();
                 // Фамилия
-                 Console.WriteLine("Введите фамилию футболиста: ");
+                Console.WriteLine("Введите фамилию футболиста: ");
                 player.Surname = Console.ReadLine();
                 while (!StringIsValid(player.Surname))
                 {
@@ -232,12 +232,27 @@ namespace FootballPlayers
             public bool isChecked()
             {
                 // Проверка фамилии
-                
+                if ((filter.F_Surname != null) && (!this.Surname.Contains(filter.F_Surname)))
+                    return false;
                 // Проверка даты рождения
+                if ((filter.F_Birthday_min != null) && (this.Birthday < filter.F_Birthday_min))
+                    return false;
+                if ((filter.F_Birthday_max != null) && (this.Birthday < filter.F_Birthday_max))
+                    return false;
                 // Проверка места рождения
+                if ((filter.F_PlaceOfBorn != null) && (!this.PlaceOfBorn.Contains(filter.F_PlaceOfBorn)))
+                    return false;
                 // Проверка амплуа
+                if ((filter.F_Role != null) && (this.Role != filter.F_Role))
+                    return false;
                 // Проверка количества игр
+                if ((filter.CountGames != null) && (this.CountGames != filter.CountGames))
+                    return false;
                 // Проверка количетсва желтых карточек
+                if ((filter.CountYellowLabel != null) && (this.CountYellowLabel != filter.CountYellowLabel))
+                    return false;
+
+                // если поля удовлетворяют фильтру
                 return true;
             }
 
@@ -247,7 +262,15 @@ namespace FootballPlayers
             /// <param name="players"></param>
             public void OutFilterList(List<Football_players> players)
             {
-
+                List<Football_players> list = new List<Football_players>();
+                foreach (var player in players)
+                {
+                    if (player.isChecked())
+                    {
+                        list.Add(player);
+                    }
+                }
+                OutFullList(list);
             }
 
 
@@ -258,13 +281,13 @@ namespace FootballPlayers
         /// </summary>
         struct Football_players_filter
         {
-            String F_Surname;               //Фильтр по фамилии
-            DateTime F_Birthday_min;        //Фильр по дате рождения
-            DateTime F_Birthday_max;        //Фильр по дате рождения
-            String F_PlaceOfBorn;           //Фильтр по месту рождения
-            Roles F_Role;                   //Фильтр по амплуа
-            int CountGames;                 //Фильтр по количеству игр
-            int CountYellowLabel;           //Фильтр по Количеству желтых карточек
+            public String F_Surname;               //Фильтр по фамилии
+            public DateTime F_Birthday_min;        //Фильр по дате рождения
+            public DateTime F_Birthday_max;        //Фильр по дате рождения
+            public String F_PlaceOfBorn;           //Фильтр по месту рождения
+            public Roles F_Role;                   //Фильтр по амплуа
+            public int CountGames;                 //Фильтр по количеству игр
+            public int CountYellowLabel;           //Фильтр по Количеству желтых карточек
 
             // Добавление фильтра
             public void AddFilter()
