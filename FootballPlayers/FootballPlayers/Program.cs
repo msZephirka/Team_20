@@ -308,6 +308,27 @@ namespace FootballPlayers
                 Console.WriteLine("Введите фильтр для места рождения: ");
                 F_PlaceOfBorn = Console.ReadLine();
 
+                // Роль
+                Console.WriteLine("Введите фильтр для амплуа: ");
+                int amplua = Convert.ToInt32(Console.ReadLine());
+                switch (amplua)
+                {
+                    case 0:
+                        F_Role = Roles.Goalkeeper;
+                        break;
+                    case 1:
+                        F_Role = Roles.Quarterback;
+                        break;
+                    case 2:
+                        F_Role = Roles.Halfback;
+                        break;
+                    case 3:
+                        F_Role = Roles.Forward;
+                        break;
+                    default:
+                        break;
+                }
+
                 // Количество игр
                 Console.WriteLine("Введите фильтр для количества игр: ");
                 CountGames = Convert.ToInt32(Console.ReadLine());
