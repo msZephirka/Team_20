@@ -12,46 +12,86 @@ namespace FootballPlayers
     {   
         static void Main(string[] args)
         {
+            // Список футболистов
             List<Football_players> football_Players = new List<Football_players>();
-            football_Players.Add(new Football_players("Markov", new DateTime(1997, 1, 25), "Cheboksary", Roles.Forward, 3, 1));
+            Football_players_filter filter = new Football_players_filter();
+            
+            // Вводимое значение
+            string ReadCh;
+
+            // Бесконечный цикл аботы программы
+            do
+            {
+                // Вывод главного меню
+                Console.WriteLine("Меню:");
+                Console.WriteLine("1. Ввод нового футболиста");
+                Console.WriteLine("2. Вывод футболистов");
+                Console.WriteLine("3. Ввод значений фильтра");
+                Console.WriteLine("4. Вывод отфильтрованного списка футболистов");
+
+                // Читаем введеный символ
+                ReadCh = Console.ReadLine();
+
+                // Выполнить выбранную команду
+                switch (ReadCh)
+                {
+                    case "1": // Ввод нового работника
+                        Console.Clear();
+                        Console.WriteLine("Ввод нового футболиста: \n");
+                        break;
+
+                    case "2": // Вывод работников
+                        Console.Clear();
+                        Console.WriteLine("Вывод полного списка футболистов: ");
+                        break;
+
+                    case "3": // Ввод значений фильтра
+                        Console.Clear();
+                        Console.WriteLine("Ввод фильтра: ");
+                        break;
+
+                    case "4": // Вывод отфильтрованного списка работников
+                        Console.Clear();
+                        Console.WriteLine("Вывод отфильтрованного списка футболистов: ");
+                        break;
+
+                    default: // Выход из программы
+                        Environment.Exit(0);
+                        break;
+                }
+
+                // Очистка экрана
+                Console.ReadKey();
+                Console.Clear();
+            } while (true);
+
+            /*football_Players.Add(new Football_players("Markov", new DateTime(1997, 1, 25), "Cheboksary", Roles.Forward, 3, 1));
             football_Players.Add(new Football_players("Ivanov", new DateTime(1997, 10, 13), "Cheboksary", Roles.Forward, 3, 1));
             football_Players.Add(new Football_players("Fedorov", new DateTime(1997, 11, 10), "Cheboksary", Roles.Forward, 3, 1));
             Football_players pl = new Football_players();
             pl.OutFullList(football_Players);
-            pl.AddNewElement();
+            pl.AddNewElement();*/
         }
-
-        //Описание структуры, описывающей фильтр 
-        struct Football_players_filter
-        {
-            String F_Surname;         //Фильтр по фамилии
-            DateTime F_Birthday;      //Фильр по дате рождения
-            String F_PlaceOfBorn;     //Фильтр по месту рождения
-            Roles F_Role;             //Фильтр по амплуа
-            int CountGames;         //Фильтр по количеству игр
-            int CountYellowLabel;   //Фильтр по Количеству желтых карточек
-        }
-
-
-        //Описание структуры, описывающей футболистов
+                
+        // Футболисты
         struct Football_players
         {
-            String Surname;         //Фамилия
-            DateTime Birthday;      //Дата рождения
-            String PlaceOfBorn;     //Место рождения
-            Roles Role;             //Амплуа
-            int CountGames;         //Количество игр
-            int CountYellowLabel;   //Количество желтых карточек
+            String Surname;         // Фамилия
+            DateTime Birthday;      // Дата рождения
+            String PlaceOfBorn;     // Место рождения
+            Roles Role;             // Амплуа
+            int CountGames;         // Количество игр
+            int CountYellowLabel;   // Количество желтых карточек
 
 
-            //признак, что в строке только русские буквы
+            // Признак, что в строке только русские буквы
             public static bool StringIsValid(string str)
             {
                 if (Regex.IsMatch(str, @"[А-Яа-я]$")) return true;
                 else return false;
             }
 
-            //ограничения для даты рождения
+            // Ограничения для даты рождения
             public static bool DateIsValid(string str)
             {
                 if (Regex.IsMatch(str, @"\d{2}.\d{2}.\d{4}")) return true;
@@ -74,7 +114,7 @@ namespace FootballPlayers
                 return true;
             }
 
-            //Конструктор структуры
+            // Конструктор структуры
             public Football_players(String Surname, DateTime Birthday, String PlaceOfBorn, Roles Role, int CountGames, int CountYellowLabel)
             {
                 this.Surname = Surname;
@@ -84,10 +124,11 @@ namespace FootballPlayers
                 this.CountGames = CountGames;
                 this.CountYellowLabel = CountYellowLabel;
             }
+
             // Метод для добавления нового футболиста 
             public bool AddNewElement()
             {
-                //Фамилия
+                // Фамилия
                 Console.WriteLine("Введите фамилию футболиста: ");
                 Surname = Console.ReadLine();
                 if (!StringIsValid(Surname))
@@ -96,8 +137,7 @@ namespace FootballPlayers
                     return false;
                 }
 
-
-                //Дата рождения
+                // Дата рождения
                 Console.WriteLine("Введите дату рождения в формате dd.mm.yyyy: ");
 
                 if (DateIsValid(Console.ReadLine()))
@@ -106,7 +146,7 @@ namespace FootballPlayers
                 }
 
 
-                //Место рождения
+                // Место рождения
                 Console.WriteLine("Введите место рождения: ");
                 PlaceOfBorn = Console.ReadLine();
                 if (!StringIsValid(PlaceOfBorn))
@@ -115,7 +155,7 @@ namespace FootballPlayers
                     return false;
                 }
 
-                //Амплуа
+                // Амплуа
                 Console.WriteLine("Введите амплуа [0 - вратарь, 1 - защитник, 2 - полузащитник, 3 - нападающий]");
                 int amplua;
                 bool isNum = int.TryParse(Console.ReadLine(), out amplua);
@@ -143,7 +183,7 @@ namespace FootballPlayers
                         return false;
                 }
 
-                //Количество игр
+                // Количество игр
                 Console.WriteLine("Введите количество игр");
 
                 try
@@ -162,7 +202,7 @@ namespace FootballPlayers
                     Console.WriteLine("Количество игр должно быть числом");
                     return false;
                 }
-                //Количество жёлтых карточек 
+                // Количество жёлтых карточек 
                 Console.WriteLine("Введите количество жёлтых карточек");
                 try
                 {
@@ -184,7 +224,7 @@ namespace FootballPlayers
                 return true;
             }
 
-            //Метод для вывода полного списка
+            // Метод для вывода полного списка
             public void OutFullList(List<Football_players> players)
             {
                 Console.WriteLine("|Фамилия\t||Дата рождения\t||Место рождения\t||Амплуа\t|" +
@@ -202,7 +242,18 @@ namespace FootballPlayers
             }
         }
 
-        //Возможные значения для поля амплуа
+        // Описание структуры, описывающей фильтр 
+        struct Football_players_filter
+        {
+            String F_Surname;         //Фильтр по фамилии
+            DateTime F_Birthday;      //Фильр по дате рождения
+            String F_PlaceOfBorn;     //Фильтр по месту рождения
+            Roles F_Role;             //Фильтр по амплуа
+            int CountGames;         //Фильтр по количеству игр
+            int CountYellowLabel;   //Фильтр по Количеству желтых карточек
+        }
+
+        // Возможные значения для поля амплуа
         enum Roles
         {
             Goalkeeper = 1,     //вратарь
