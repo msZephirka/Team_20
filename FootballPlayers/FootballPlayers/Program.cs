@@ -225,7 +225,8 @@ namespace FootballPlayers
         struct Football_players_filter
         {
             String F_Surname;         //Фильтр по фамилии
-            DateTime F_Birthday;      //Фильр по дате рождения
+            DateTime F_Birthday_min;      //Фильр по дате рождения
+            DateTime F_Birthday_max;      //Фильр по дате рождения
             String F_PlaceOfBorn;     //Фильтр по месту рождения
             Roles F_Role;             //Фильтр по амплуа
             int CountGames;         //Фильтр по количеству игр
@@ -234,7 +235,29 @@ namespace FootballPlayers
             // Добавление фильтра
             public void AddFilter()
             {
+                // Фамилия
+                Console.WriteLine("Введите фильтр для фамилии: ");
+                F_Surname = Console.ReadLine();
 
+                // Дата рождения(max)
+                Console.WriteLine("Введите верхнюю границу даты рождения: ");
+                F_Birthday_max = Convert.ToDateTime(Console.ReadLine());
+
+                // Дата рождения(min)
+                Console.WriteLine("Введите нижнюю границу даты рождения: ");
+                F_Birthday_min = Convert.ToDateTime(Console.ReadLine());
+
+                // Место рождения
+                Console.WriteLine("Введите фильтр для места рождения: ");
+                F_PlaceOfBorn = Console.ReadLine();
+
+                // Количество игр
+                Console.WriteLine("Введите фильтр для количества игр: ");
+                CountGames = Convert.ToInt32(Console.ReadLine());
+
+                // Количество жёлтых карточек
+                Console.WriteLine("Введите фильтр для количества жёлтых карточек: ");
+                CountYellowLabel = Convert.ToInt32(Console.ReadLine());
             }
         }
 
