@@ -35,25 +35,28 @@ namespace FootballPlayers
                 // Выполнить выбранную команду
                 switch (ReadCh)
                 {
-                    case "1": // Ввод нового работника
+                    case "1": // Ввод нового футболиста
                         Console.Clear();
                         Console.WriteLine("Ввод нового футболиста: \n");
                         Football_players.AddNewElement(football_Players);
                         break;
 
-                    case "2": // Вывод работников
+                    case "2": // Вывод футболистов
                         Console.Clear();
                         Console.WriteLine("Вывод полного списка футболистов: ");
+                        Football_players.OutFullList(football_Players);
                         break;
 
                     case "3": // Ввод значений фильтра
                         Console.Clear();
                         Console.WriteLine("Ввод фильтра: ");
+                        Football_players.filter.AddFilter();
                         break;
 
-                    case "4": // Вывод отфильтрованного списка работников
+                    case "4": // Вывод отфильтрованного списка футболистов
                         Console.Clear();
                         Console.WriteLine("Вывод отфильтрованного списка футболистов: ");
+                        Football_players.OutFilterList(football_Players);
                         break;
 
                     default: // Выход из программы
@@ -65,13 +68,6 @@ namespace FootballPlayers
                 Console.ReadKey();
                 Console.Clear();
             } while (true);
-
-            /*football_Players.Add(new Football_players("Markov", new DateTime(1997, 1, 25), "Cheboksary", Roles.Forward, 3, 1));
-            football_Players.Add(new Football_players("Ivanov", new DateTime(1997, 10, 13), "Cheboksary", Roles.Forward, 3, 1));
-            football_Players.Add(new Football_players("Fedorov", new DateTime(1997, 11, 10), "Cheboksary", Roles.Forward, 3, 1));
-            Football_players pl = new Football_players();
-            pl.OutFullList(football_Players);
-            pl.AddNewElement();*/
         }
 
         /// <summary>
@@ -209,7 +205,7 @@ namespace FootballPlayers
             /// Вывод полного списка
             /// </summary>
             /// <param name="players"></param>
-            public void OutFullList(List<Football_players> players)
+            public static void OutFullList(List<Football_players> players)
             {
                 Console.WriteLine("|Фамилия\t||Дата рождения\t||Место рождения\t||Амплуа\t|" +
                         "|Количество игр||Количество желтых карт|");
@@ -260,7 +256,7 @@ namespace FootballPlayers
             /// Вывод с применением фильтра
             /// </summary>
             /// <param name="players"></param>
-            public void OutFilterList(List<Football_players> players)
+            public static void OutFilterList(List<Football_players> players)
             {
                 List<Football_players> list = new List<Football_players>();
                 foreach (var player in players)
