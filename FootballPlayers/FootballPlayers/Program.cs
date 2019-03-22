@@ -275,11 +275,24 @@ namespace FootballPlayers
 
                 // Дата рождения(max)
                 Console.WriteLine("Введите верхнюю границу даты рождения: ");
-                F_Birthday_max = Convert.ToDateTime(Console.ReadLine());
-
+                try
+                {
+                    F_Birthday_max = Convert.ToDateTime(Console.ReadLine());
+                }
+                catch
+                {
+                    F_Birthday_max = DateTime.MinValue;
+                }
                 // Дата рождения(min)
                 Console.WriteLine("Введите нижнюю границу даты рождения: ");
-                F_Birthday_min = Convert.ToDateTime(Console.ReadLine());
+                try
+                {
+                    F_Birthday_min = Convert.ToDateTime(Console.ReadLine());
+                }
+                catch
+                {
+                    F_Birthday_min = DateTime.MinValue;
+                }
 
                 // Место рождения
                 Console.WriteLine("Введите фильтр для места рождения: ");
