@@ -74,7 +74,9 @@ namespace FootballPlayers
             pl.AddNewElement();*/
         }
                 
-        // Футболисты
+        /// <summary>
+        /// Футболисты
+        /// </summary>
         struct Football_players
         {
             String Surname;         // Фамилия
@@ -203,7 +205,10 @@ namespace FootballPlayers
                 Console.WriteLine("Футболист добавлен! Нажмите enter для возврата в меню");
             }
 
-            // Метод для вывода полного списка
+            /// <summary>
+            /// Вывод полного списка
+            /// </summary>
+            /// <param name="players"></param>
             public void OutFullList(List<Football_players> players)
             {
                 Console.WriteLine("|Фамилия\t||Дата рождения\t||Место рождения\t||Амплуа\t|" +
@@ -219,17 +224,45 @@ namespace FootballPlayers
                     Console.Write("\n");
                 }
             }
+
+            /// <summary>
+            /// Проверка футболистов 
+            /// </summary>
+            /// <returns></returns>
+            public bool isChecked()
+            {
+                // Проверка фамилии
+                // Проверка даты рождения
+                // Проверка места рождения
+                // Проверка амплуа
+                // Проверка количества игр
+                // Проверка количетсва желтых карточек
+                return true;
+            }
+
+            /// <summary>
+            /// Вывод с применением фильтра
+            /// </summary>
+            /// <param name="players"></param>
+            public void OutFilterList(List<Football_players> players)
+            {
+
+            }
+
+
         }
 
-        // Описание структуры, описывающей фильтр 
+        /// <summary>
+        /// Фильтр
+        /// </summary>
         struct Football_players_filter
         {
-            String F_Surname;         //Фильтр по фамилии
-            DateTime F_Birthday;      //Фильр по дате рождения
-            String F_PlaceOfBorn;     //Фильтр по месту рождения
-            Roles F_Role;             //Фильтр по амплуа
-            int CountGames;         //Фильтр по количеству игр
-            int CountYellowLabel;   //Фильтр по Количеству желтых карточек
+            String F_Surname;           //Фильтр по фамилии
+            DateTime F_Birthday;        //Фильр по дате рождения
+            String F_PlaceOfBorn;       //Фильтр по месту рождения
+            Roles F_Role;               //Фильтр по амплуа
+            int CountGames;             //Фильтр по количеству игр
+            int CountYellowLabel;       //Фильтр по количеству желтых карточек
 
             // Добавление фильтра
             public void AddFilter()
@@ -238,7 +271,9 @@ namespace FootballPlayers
             }
         }
 
-        // Возможные значения для поля амплуа
+        /// <summary>
+        /// Возможные значения амплуа
+        /// </summary>
         enum Roles
         {
             Goalkeeper = 1,     //вратарь
