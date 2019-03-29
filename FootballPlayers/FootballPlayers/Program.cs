@@ -97,6 +97,7 @@ namespace FootballPlayers
                 if (Regex.IsMatch(str, @"[А-Яа-я]$")) return true;
                 else return false;
             }
+
             // Конструктор структуры
             public Football_players(String Surname, DateTime Birthday, String PlaceOfBorn, Roles Role, int CountGames, int CountYellowLabel)
             {
@@ -115,6 +116,7 @@ namespace FootballPlayers
             public static void AddNewElement(List<Football_players> players)
             {
                 Football_players player = new Football_players();
+
                 // Ввод фамилия
                 Console.WriteLine("Введите фамилию футболиста: ");
                 player.Surname = Console.ReadLine();
@@ -197,6 +199,7 @@ namespace FootballPlayers
                     Console.WriteLine("Количество игр не может быть отрицательным. Повторите ввод: ");
                     countGames = Convert.ToInt32(Console.ReadLine());
                 }
+
                 // Ввод количества жёлтых карточек 
                 Console.WriteLine("Введите количество жёлтых карточек");
                 int countYellowLabel = Convert.ToInt32(Console.ReadLine());
