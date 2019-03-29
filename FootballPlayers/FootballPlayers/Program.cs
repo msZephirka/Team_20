@@ -17,13 +17,6 @@ namespace FootballPlayers
             Football_players.filter = new Football_players_filter();
             string ReadCh;
 
-            /// Вывод главного меню
-            /// Пользватель выбирает один пункт из главного меню
-            /// Если пользователь выбрал:
-            /// Ввод нового футолиста - Открывается форма добавления нового футболиста
-            /// Вывод футболистов - Выводится полный список футболистов
-            /// Ввод значений фильтра - Открывается форма для ввода значений фильтра
-            /// Вывод отфильтрованного списка - Выводится список футболистов, удоавлетворяющих условиям теущего введенного фильтра
             do
             {
                 // Вывод главного меню
@@ -83,8 +76,8 @@ namespace FootballPlayers
             DateTime Birthday;      // Дата рождения
             String PlaceOfBorn;     // Место рождения
             Roles Role;             // Амплуа
-            int CountGames;         // Количество игр
-            int CountYellowLabel;   // Количество желтых карточек
+            uint CountGames;         // Количество игр
+            uint CountYellowLabel;   // Количество желтых карточек
 
             public static Football_players_filter filter; // Фильтр
 
@@ -98,7 +91,7 @@ namespace FootballPlayers
                 else return false;
             }
             // Конструктор структуры
-            public Football_players(String Surname, DateTime Birthday, String PlaceOfBorn, Roles Role, int CountGames, int CountYellowLabel)
+            public Football_players(String Surname, DateTime Birthday, String PlaceOfBorn, Roles Role, uint CountGames, uint CountYellowLabel)
             {
                 this.Surname = Surname;
                 this.Birthday = Birthday;
@@ -115,7 +108,7 @@ namespace FootballPlayers
             public static void AddNewElement(List<Football_players> players)
             {
                 Football_players player = new Football_players();
-                // Ввод фамилия
+                // Ввод фамилии
                 Console.WriteLine("Введите фамилию футболиста: ");
                 player.Surname = Console.ReadLine();
                 while (!IsRussianStr(player.Surname))
@@ -127,7 +120,7 @@ namespace FootballPlayers
                 // Ввод даты рождения
                 Console.WriteLine("Введите дату рождения в формате dd.mm.yyyy: ");
                 string str = Console.ReadLine();
-                while (!Regex.IsMatch(str, @"\d{2}.\d{2}.\d{4}"))
+                do
                 {
                     try
                     {
@@ -146,7 +139,7 @@ namespace FootballPlayers
                         Console.WriteLine("Неправильно ввели дату рождения. Повтрите ввод: ");
                         str = Console.ReadLine();
                     }
-                }
+                } while (!Regex.IsMatch(str, @"\d{2}.\d{2}.\d{4}"));
 
                 // Ввод места рождения
                 Console.WriteLine("Введите место рождения: ");
@@ -160,12 +153,11 @@ namespace FootballPlayers
                 // Ввод амплуа
                 Console.WriteLine("Введите амплуа [0 - вратарь, 1 - защитник, 2 - полузащитник, 3 - нападающий]");
                 int amplua;
-                bool isNum = int.TryParse(Console.ReadLine(), out amplua);
-                while (!isNum)
-                {
-                    Console.WriteLine("Неправильно ввели амплуа. Повторите ввод:");
-                    isNum = int.TryParse(Console.ReadLine(), out amplua);
+                bool isNum;
 
+                do
+                {
+                    isNum = int.TryParse(Console.ReadLine(), out amplua);
                     switch (amplua)
                     {
                         case 0:
@@ -184,29 +176,44 @@ namespace FootballPlayers
                             Console.WriteLine("Неправильно ввели амплуа. Повторите ввод:");
                             isNum = int.TryParse(Console.ReadLine(), out amplua);
                             break;
-
                     }
-                }
+                } while (!isNum);
 
                 // Ввод количества игр
                 Console.WriteLine("Введите количество игр");
-                int countGames = Convert.ToInt32(Console.ReadLine());
-
-                while (countGames < 0)
+                bool ok = false;                
+                while (!ok)
                 {
-                    Console.WriteLine("Количество игр не может быть отрицательным. Повторите ввод: ");
-                    countGames = Convert.ToInt32(Console.ReadLine());
+                    try
+                    {
+                        uint countGames = Convert.ToUInt32(Console.ReadLine());
+                        player.CountGames = countGames;
+                        ok = true;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Количество игр не может быть отрицательным. Повторите ввод: ");
+                    }
                 }
+
                 // Ввод количества жёлтых карточек 
                 Console.WriteLine("Введите количество жёлтых карточек");
-                int countYellowLabel = Convert.ToInt32(Console.ReadLine());
-
-                while (countYellowLabel < 0)
+                ok = false;
+                while (!ok)
                 {
-                    Console.WriteLine("Количество игр не может быть отрицательным. Повторите ввод: ");
-                    countYellowLabel = Convert.ToInt32(Console.ReadLine());
+                    try
+                    {
+                        uint countYellowLabel = Convert.ToUInt32(Console.ReadLine());
+                        player.CountYellowLabel = countYellowLabel;
+                        ok = true;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Количество игр не может быть отрицательным. Повторите ввод: ");
+                    }
                 }
 
+                // Добавление нового футолиста
                 players.Add(player);
                 Console.WriteLine("Футболист добавлен! Нажмите enter для возврата в меню");
             }
@@ -240,22 +247,37 @@ namespace FootballPlayers
                 // Проверка фамилии
                 if ((filter.F_Surname != null) && (!this.Surname.Contains(filter.F_Surname)))
                     return false;
-                // Проверка даты рождения
-                if ((filter.F_Birthday_min != null) && (this.Birthday < filter.F_Birthday_min))
+
+                // Проверка даты рождения (min)
+                if ((filter.F_Birthday_min != null) && (this.Birthday > filter.F_Birthday_min))
                     return false;
+
+                // Проверка даты рождения (max)
                 if ((filter.F_Birthday_max != null) && (this.Birthday < filter.F_Birthday_max))
                     return false;
+
                 // Проверка места рождения
                 if ((filter.F_PlaceOfBorn != null) && (!this.PlaceOfBorn.Contains(filter.F_PlaceOfBorn)))
                     return false;
+
                 // Проверка амплуа
                 if ((filter.F_Role != null) && (this.Role != filter.F_Role))
                     return false;
-                // Проверка количества игр
-                if ((filter.CountGames != null) && (this.CountGames != filter.CountGames))
+
+                // Проверка количества игр (min)
+                if ((filter.CountGames_min != null) && (this.CountGames > filter.CountGames_min))
                     return false;
-                // Проверка количетсва желтых карточек
-                if ((filter.CountYellowLabel != null) && (this.CountYellowLabel != filter.CountYellowLabel))
+
+                // Проверка количества игр (max)
+                if ((filter.CountGames_max != null) && (this.CountGames < filter.CountGames_max))
+                    return false;
+
+                // Проверка количетсва желтых карточек (min)
+                if ((filter.CountYellowLabel_min != null) && (this.CountYellowLabel > filter.CountYellowLabel_min))
+                    return false;
+
+                // Проверка количетсва желтых карточек (max)
+                if ((filter.CountYellowLabel_max != null) && (this.CountYellowLabel < filter.CountYellowLabel_max))
                     return false;
 
                 // если поля удовлетворяют фильтру
@@ -288,12 +310,14 @@ namespace FootballPlayers
         struct Football_players_filter
         {
             public String F_Surname;               //Фильтр по фамилии
-            public DateTime F_Birthday_min;        //Фильр по дате рождения
-            public DateTime F_Birthday_max;        //Фильр по дате рождения
+            public DateTime? F_Birthday_min;        //Фильр по дате рождения (min)
+            public DateTime? F_Birthday_max;        //Фильр по дате рождения (max)
             public String F_PlaceOfBorn;           //Фильтр по месту рождения
-            public Roles F_Role;                   //Фильтр по амплуа
-            public int CountGames;                 //Фильтр по количеству игр
-            public int CountYellowLabel;           //Фильтр по Количеству желтых карточек
+            public Roles? F_Role;                   //Фильтр по амплуа
+            public int? CountGames_min;             //Фильтр по количеству игр (min)
+            public int? CountGames_max;             //Фильтр по количеству игр (max)
+            public int? CountYellowLabel_min;       //Фильтр по Количеству желтых карточек (min)
+            public int? CountYellowLabel_max;       //Фильтр по Количеству желтых карточек (max)
 
             /// <summary>
             /// Добавление фильтра
@@ -350,13 +374,21 @@ namespace FootballPlayers
                         break;
                 }
 
-                // Ввод фильтра для количества игр
-                Console.WriteLine("Введите фильтр для количества игр: ");
-                CountGames = Convert.ToInt32(Console.ReadLine());
+                // Ввод нижней границы фильтра для количества игр
+                Console.WriteLine("Введите нижнюю границу фильтра для количества игр: ");
+                CountGames_min = Convert.ToInt32(Console.ReadLine());
 
-                // Ввод фильтра для количества жёлтых карточек
-                Console.WriteLine("Введите фильтр для количества жёлтых карточек: ");
-                CountYellowLabel = Convert.ToInt32(Console.ReadLine());
+                // Ввод верхней границы фильтра для количества игр
+                Console.WriteLine("Введите верхнюю границу фильтра для количества игр: ");
+                CountGames_max = Convert.ToInt32(Console.ReadLine());
+
+                // Ввод нижней границы фильтра для количества жёлтых карточек
+                Console.WriteLine("Введите нижнюю границу фильтр для количества жёлтых карточек: ");
+                CountYellowLabel_min = Convert.ToInt32(Console.ReadLine());
+
+                // Ввод верхней границы фильтра для количества жёлтых карточек
+                Console.WriteLine("Введите верхнюю границу фильтр для количества жёлтых карточек: ");
+                CountYellowLabel_max = Convert.ToInt32(Console.ReadLine());
             }
         }
 
