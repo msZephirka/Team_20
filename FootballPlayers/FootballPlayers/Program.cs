@@ -88,8 +88,11 @@ namespace FootballPlayers
 
             public static Football_players_filter filter; // Фильтр
 
-            // Признак, что в строке только русские буквы
-            public static bool StringIsValid(string str)
+            /// <summary>
+            /// Проверить, все ли буквы в строке русские
+            /// </summary>
+            /// <param name="">str</param> 
+            public static bool IsRussianStr(string str)
             {
                 if (Regex.IsMatch(str, @"[А-Яа-я]$")) return true;
                 else return false;
@@ -105,20 +108,23 @@ namespace FootballPlayers
                 this.CountYellowLabel = CountYellowLabel;
             }
 
-            // Метод для добавления нового футболиста 
+            /// <summary>
+            /// Добавление нового футболиста
+            /// </summary>
+            /// <param name="players"></param>            
             public static void AddNewElement(List<Football_players> players)
             {
                 Football_players player = new Football_players();
-                // Фамилия
+                // Ввод фамилия
                 Console.WriteLine("Введите фамилию футболиста: ");
                 player.Surname = Console.ReadLine();
-                while (!StringIsValid(player.Surname))
+                while (!IsRussianStr(player.Surname))
                 {
                     Console.WriteLine("Фамилия может содержать только буквы русского алфавита. Повторите ввод:");
                     player.Surname = Console.ReadLine();
                 }
 
-                // Дата рождения
+                // Ввод даты рождения
                 Console.WriteLine("Введите дату рождения в формате dd.mm.yyyy: ");
                 string str = Console.ReadLine();
                 while (!Regex.IsMatch(str, @"\d{2}.\d{2}.\d{4}"))
@@ -142,16 +148,16 @@ namespace FootballPlayers
                     }
                 }
 
-                // Место рождения
+                // Ввод места рождения
                 Console.WriteLine("Введите место рождения: ");
                 player.PlaceOfBorn = Console.ReadLine();
-                while (!StringIsValid(player.PlaceOfBorn))
+                while (!IsRussianStr(player.PlaceOfBorn))
                 {
                     Console.WriteLine("Место рождения может содержать только буквы русского алфавита. Повторите ввод:");
                     player.PlaceOfBorn = Console.ReadLine();
                 }
 
-                // Амплуа
+                // Ввод амплуа
                 Console.WriteLine("Введите амплуа [0 - вратарь, 1 - защитник, 2 - полузащитник, 3 - нападающий]");
                 int amplua;
                 bool isNum = int.TryParse(Console.ReadLine(), out amplua);
@@ -182,7 +188,7 @@ namespace FootballPlayers
                     }
                 }
 
-                // Количество игр
+                // Ввод количества игр
                 Console.WriteLine("Введите количество игр");
                 int countGames = Convert.ToInt32(Console.ReadLine());
 
@@ -191,7 +197,7 @@ namespace FootballPlayers
                     Console.WriteLine("Количество игр не может быть отрицательным. Повторите ввод: ");
                     countGames = Convert.ToInt32(Console.ReadLine());
                 }
-                // Количество жёлтых карточек 
+                // Ввод количества жёлтых карточек 
                 Console.WriteLine("Введите количество жёлтых карточек");
                 int countYellowLabel = Convert.ToInt32(Console.ReadLine());
 
@@ -289,14 +295,16 @@ namespace FootballPlayers
             public int CountGames;                 //Фильтр по количеству игр
             public int CountYellowLabel;           //Фильтр по Количеству желтых карточек
 
-            // Добавление фильтра
+            /// <summary>
+            /// Добавление фильтра
+            /// </summary>
             public void AddFilter()
             {
-                // Фамилия
+                // Ввод фильтра для фамилии
                 Console.WriteLine("Введите фильтр для фамилии: ");
                 F_Surname = Console.ReadLine();
 
-                // Дата рождения(max)
+                // Ввод фильтра для верхней границы даты рождения(max)
                 Console.WriteLine("Введите верхнюю границу даты рождения: ");
                 try
                 {
@@ -306,7 +314,7 @@ namespace FootballPlayers
                 {
                     F_Birthday_max = DateTime.MinValue;
                 }
-                // Дата рождения(min)
+                // Ввод фильтра для нижней границы даты рождения(min)
                 Console.WriteLine("Введите нижнюю границу даты рождения: ");
                 try
                 {
@@ -317,11 +325,11 @@ namespace FootballPlayers
                     F_Birthday_min = DateTime.MinValue;
                 }
 
-                // Место рождения
+                // Ввод фильтра для места рождения
                 Console.WriteLine("Введите фильтр для места рождения: ");
                 F_PlaceOfBorn = Console.ReadLine();
 
-                // Роль
+                // Ввод фильтра для роли 
                 Console.WriteLine("Введите фильтр для амплуа: ");
                 int amplua = Convert.ToInt32(Console.ReadLine());
                 switch (amplua)
@@ -342,11 +350,11 @@ namespace FootballPlayers
                         break;
                 }
 
-                // Количество игр
+                // Ввод фильтра для количества игр
                 Console.WriteLine("Введите фильтр для количества игр: ");
                 CountGames = Convert.ToInt32(Console.ReadLine());
 
-                // Количество жёлтых карточек
+                // Ввод фильтра для количества жёлтых карточек
                 Console.WriteLine("Введите фильтр для количества жёлтых карточек: ");
                 CountYellowLabel = Convert.ToInt32(Console.ReadLine());
             }
