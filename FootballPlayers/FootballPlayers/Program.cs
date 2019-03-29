@@ -12,14 +12,18 @@ namespace FootballPlayers
     {
         static void Main(string[] args)
         {
-            // Список футболистов
+            // Список футболистов, фильтр
             List<Football_players> football_Players = new List<Football_players>();
             Football_players.filter = new Football_players_filter();
-
-            // Вводимое значение
             string ReadCh;
 
-            // Бесконечный цикл аботы программы
+            /// Вывод главного меню
+            /// Пользватель выбирает один пункт из главного меню
+            /// Если пользователь выбрал:
+            /// Ввод нового футолиста - Открывается форма добавления нового футболиста
+            /// Вывод футболистов - Выводится полный список футболистов
+            /// Ввод значений фильтра - Открывается форма для ввода значений фильтра
+            /// Вывод отфильтрованного списка - Выводится список футболистов, удоавлетворяющих условиям теущего введенного фильтра
             do
             {
                 // Вывод главного меню
@@ -29,42 +33,29 @@ namespace FootballPlayers
                 Console.WriteLine("3. Ввод значений фильтра");
                 Console.WriteLine("4. Вывод отфильтрованного списка футболистов");
 
-                // Читаем введеный символ
+                // Пользватель выбирает один пункт из главного меню
                 ReadCh = Console.ReadLine();
-
-                // Выполнить выбранную команду
+                
+                // Если пользователь выбрал:
                 switch (ReadCh)
                 {
-                    case "1": // Ввод нового футболиста
+                    case "1": // Ввод нового футолиста - Открывается форма добавления нового футболиста
                         Console.Clear();
                         Console.WriteLine("Ввод нового футболиста: \n");
                         Football_players.AddNewElement(football_Players);
                         break;
 
-                    case "2": // Вывод футболистов
+                    case "2": // Вывод футболистов - Выводится полный список футболистов
                         Console.Clear();
                         Console.WriteLine("Вывод полного списка футболистов: ");
                         Football_players.OutFullList(football_Players);
                         break;
 
-                    case "3": // Ввод значений фильтра
+                    case "3": // Ввод значений фильтра - Открывается форма для ввода значений фильтра
                         Console.Clear();
                         Console.WriteLine("Ввод фильтра: ");
                         Football_players.filter.AddFilter();
                         break;
-
-                    case "4": // Вывод отфильтрованного списка футболистов
-                        Console.Clear();
-                        Console.WriteLine("Вывод отфильтрованного списка футболистов: ");
-                        Football_players.OutFilterList(football_Players);
-                        break;
-
-                    default: // Выход из программы
-                        Environment.Exit(0);
-                        break;
-                }
-
-                // Очистка экрана
                 Console.ReadKey();
                 Console.Clear();
             } while (true);
