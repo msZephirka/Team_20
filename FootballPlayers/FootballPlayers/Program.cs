@@ -355,6 +355,7 @@ namespace FootballPlayers
                 {
                     F_Birthday_max = DateTime.MinValue;
                 }
+
                 // Ввод фильтра для нижней границы даты рождения(min)
                 Console.WriteLine("Введите нижнюю границу даты рождения: ");
                 try
