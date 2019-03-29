@@ -56,6 +56,19 @@ namespace FootballPlayers
                         Console.WriteLine("Ввод фильтра: ");
                         Football_players.filter.AddFilter();
                         break;
+
+                    case "4": // Вывод отфильтрованного списка - Выводится список футболистов, удоавлетворяющих условиям теущего введенного фильтра
+                        Console.Clear();
+                        Console.WriteLine("Вывод отфильтрованного списка футболистов: ");
+                        Football_players.OutFilterList(football_Players);
+                        break;
+
+                    default: // Выход из программы
+                        Environment.Exit(0);
+                        break;
+                }
+
+                // Очистка экрана
                 Console.ReadKey();
                 Console.Clear();
             } while (true);
