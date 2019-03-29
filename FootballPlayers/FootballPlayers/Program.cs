@@ -337,6 +337,90 @@ namespace FootballPlayers
             public int? CountYellowLabel_max;       //Фильтр по Количеству желтых карточек (max)
 
             /// <summary>
+            /// Ввод даты
+            /// </summary>
+            /// <return>Введённая дата</return>
+            public DateTime? InputDate()
+            {
+                DateTime date;
+                // Ввод даты
+                string str = Console.ReadLine();
+
+                // Если строка пустая, возвращаем значение null
+                if (str == String.Empty) return null;
+
+                // Преобразовываем строку в дату
+                try
+                {
+                    date = Convert.ToDateTime(str);
+                    return date;
+                }
+                catch
+                {
+                    Console.WriteLine("Неправильно ввели дату. Повторите ввод");
+                    return null;
+                }
+            }
+
+            /// <summary>
+            /// Ввод амплуа
+            /// </summary>
+            /// <return>Введённое амплуа</return>
+            public Roles? InputRole()
+            {
+                int amplua;
+                bool isNum;
+                try
+                {
+                    isNum = int.TryParse(Console.ReadLine(), out amplua);
+                    switch (amplua)
+                    {
+                        case 0:
+                            return Roles.Goalkeeper;
+                        case 1:
+                            return Roles.Quarterback;
+                        case 2:
+                            return Roles.Halfback;
+                        case 3:
+                            return Roles.Forward;
+                        default:
+                            Console.WriteLine("Неправильно ввели амплуа. Повторите ввод:");
+                            return null;
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("Неправильно ввели амплуа. Повторите ввод:");
+                    return null;
+                }               
+            }
+
+            /// <summary>
+            /// Ввод числа
+            /// </summary>
+            /// <return>Введённое число</return>
+            public int? InputInt()
+            {
+                // Ввод числа
+                string str = Console.ReadLine();
+
+                // Если строка пустая, возвращаем значение null
+                if (str == String.Empty) return null;
+
+                // Преобразовываем строку в число
+                try
+                {
+                    var result = Convert.ToInt32(str);
+                    return result;
+                }
+                catch
+                {
+                    Console.WriteLine("Неправильно ввели число. Повторите ввод");
+                    return null;
+                }
+            }
+
+            /// <summary>
             /// Добавление фильтра
             /// </summary>
             public void AddFilter()
@@ -347,25 +431,11 @@ namespace FootballPlayers
 
                 // Ввод фильтра для верхней границы даты рождения(max)
                 Console.WriteLine("Введите верхнюю границу даты рождения: ");
-                try
-                {
-                    F_Birthday_max = Convert.ToDateTime(Console.ReadLine());
-                }
-                catch
-                {
-                    F_Birthday_max = DateTime.MinValue;
-                }
+                F_Birthday_max = InputDate();
 
                 // Ввод фильтра для нижней границы даты рождения(min)
                 Console.WriteLine("Введите нижнюю границу даты рождения: ");
-                try
-                {
-                    F_Birthday_min = Convert.ToDateTime(Console.ReadLine());
-                }
-                catch
-                {
-                    F_Birthday_min = DateTime.MinValue;
-                }
+                F_Birthday_min = InputDate();
 
                 // Ввод фильтра для места рождения
                 Console.WriteLine("Введите фильтр для места рождения: ");
@@ -373,40 +443,23 @@ namespace FootballPlayers
 
                 // Ввод фильтра для роли 
                 Console.WriteLine("Введите фильтр для амплуа: ");
-                int amplua = Convert.ToInt32(Console.ReadLine());
-                switch (amplua)
-                {
-                    case 0:
-                        F_Role = Roles.Goalkeeper;
-                        break;
-                    case 1:
-                        F_Role = Roles.Quarterback;
-                        break;
-                    case 2:
-                        F_Role = Roles.Halfback;
-                        break;
-                    case 3:
-                        F_Role = Roles.Forward;
-                        break;
-                    default:
-                        break;
-                }
+                F_Role = InputRole();
 
                 // Ввод нижней границы фильтра для количества игр
                 Console.WriteLine("Введите нижнюю границу фильтра для количества игр: ");
-                CountGames_min = Convert.ToInt32(Console.ReadLine());
+                CountGames_min = InputInt();
 
                 // Ввод верхней границы фильтра для количества игр
                 Console.WriteLine("Введите верхнюю границу фильтра для количества игр: ");
-                CountGames_max = Convert.ToInt32(Console.ReadLine());
+                CountGames_max = InputInt();
 
                 // Ввод нижней границы фильтра для количества жёлтых карточек
                 Console.WriteLine("Введите нижнюю границу фильтр для количества жёлтых карточек: ");
-                CountYellowLabel_min = Convert.ToInt32(Console.ReadLine());
+                CountYellowLabel_min = InputInt();
 
                 // Ввод верхней границы фильтра для количества жёлтых карточек
                 Console.WriteLine("Введите верхнюю границу фильтр для количества жёлтых карточек: ");
-                CountYellowLabel_max = Convert.ToInt32(Console.ReadLine());
+                CountYellowLabel_max = InputInt();
             }
         }
 
