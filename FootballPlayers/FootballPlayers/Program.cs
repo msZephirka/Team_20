@@ -91,14 +91,23 @@ namespace FootballPlayers
             /// <summary>
             /// Проверить, все ли буквы в строке русские
             /// </summary>
-            /// <param name="">str</param> 
+            /// <param name="str">Проверяемая строка</param> 
+            /// <return>Результат проверки</return>
             public static bool IsRussianStr(string str)
             {
                 if (Regex.IsMatch(str, @"[А-Яа-я]$")) return true;
                 else return false;
             }
 
-            // Конструктор структуры
+            /// <summary>
+            /// Конструктор структуры
+            /// </summary>
+            /// <param name="Surname">Фамилия футболиста</param> 
+            /// <param name="Birthday">День рождения</param> 
+            /// <param name="PlaceOfBorn">Место рождения</param> 
+            /// <param name="Role">Амплуа</param> 
+            /// <param name="CountGames">Количество игр</param> 
+            /// <param name="CountYellowLabel">Количество жёлтых карточек</param> 
             public Football_players(String Surname, DateTime Birthday, String PlaceOfBorn, Roles Role, int CountGames, int CountYellowLabel)
             {
                 this.Surname = Surname;
@@ -112,9 +121,10 @@ namespace FootballPlayers
             /// <summary>
             /// Добавление нового футболиста
             /// </summary>
-            /// <param name="players"></param>            
+            /// <param name="players">Список футболистов</param>            
             public static void AddNewElement(List<Football_players> players)
             {
+                // Новый футболист
                 Football_players player = new Football_players();
 
                 // Ввод фамилия
@@ -162,8 +172,8 @@ namespace FootballPlayers
                 // Ввод амплуа
                 Console.WriteLine("Введите амплуа [0 - вратарь, 1 - защитник, 2 - полузащитник, 3 - нападающий]");
                 int amplua;
-                bool isNum = int.TryParse(Console.ReadLine(), out amplua);
-                while (!isNum)
+                bool isNum;
+                do
                 {
                     Console.WriteLine("Неправильно ввели амплуа. Повторите ввод:");
                     isNum = int.TryParse(Console.ReadLine(), out amplua);
@@ -189,6 +199,7 @@ namespace FootballPlayers
 
                     }
                 }
+                while (!isNum);
 
                 // Ввод количества игр
                 Console.WriteLine("Введите количество игр");
@@ -217,7 +228,7 @@ namespace FootballPlayers
             /// <summary>
             /// Вывод полного списка
             /// </summary>
-            /// <param name="players"></param>
+            /// <param name="players">Список футболистов</param>
             public static void OutFullList(List<Football_players> players)
             {
                 Console.WriteLine("|Фамилия\t||Дата рождения\t||Место рождения\t||Амплуа\t|" +
@@ -237,7 +248,7 @@ namespace FootballPlayers
             /// <summary>
             /// Проверка футболистов 
             /// </summary>
-            /// <returns></returns>
+            /// <returns>Признак того, что футболист удовлетворяет условиям фильтра</returns>
             public bool isChecked()
             {
                 // Проверка фамилии
@@ -268,17 +279,23 @@ namespace FootballPlayers
             /// <summary>
             /// Вывод с применением фильтра
             /// </summary>
-            /// <param name="players"></param>
+            /// <param name="players">Список футболистов</param>
             public static void OutFilterList(List<Football_players> players)
             {
+                // Отфильтрованный список футболистов
                 List<Football_players> list = new List<Football_players>();
+
+                // Каждый футболист проверяется на удовлетворение условиям фильтра
                 foreach (var player in players)
                 {
+                    // Если удовлетворяет, добавляем в отфильтрованный список
                     if (player.isChecked())
                     {
                         list.Add(player);
                     }
                 }
+
+                // Выводим отфильтрованный список на экран
                 OutFullList(list);
             }
 
