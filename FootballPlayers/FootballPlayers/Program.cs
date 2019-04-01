@@ -29,28 +29,28 @@ namespace FootballPlayers
                 // Пользватель выбирает один пункт из главного меню
                 ReadCh = Console.ReadLine();
                 
-                // Если пользователь выбрал:
+                // Обработка выбора пользователя
                 switch (ReadCh)
                 {
-                    case "1": // Ввод нового футолиста - Открывается форма добавления нового футболиста
+                    case "1": // Ввод нового футолиста
                         Console.Clear();
                         Console.WriteLine("Ввод нового футболиста: \n");
                         Football_players.AddNewElement(football_Players);
                         break;
 
-                    case "2": // Вывод футболистов - Выводится полный список футболистов
+                    case "2": // Вывод футболистов
                         Console.Clear();
                         Console.WriteLine("Вывод полного списка футболистов: ");
                         Football_players.OutFullList(football_Players);
                         break;
 
-                    case "3": // Ввод значений фильтра - Открывается форма для ввода значений фильтра
+                    case "3": // Ввод значений фильтра
                         Console.Clear();
                         Console.WriteLine("Ввод фильтра: ");
                         Football_players.filter.AddFilter();
                         break;
 
-                    case "4": // Вывод отфильтрованного списка - Выводится список футболистов, удоавлетворяющих условиям теущего введенного фильтра
+                    case "4": // Вывод отфильтрованного списка
                         Console.Clear();
                         Console.WriteLine("Вывод отфильтрованного списка футболистов: ");
                         Football_players.OutFilterList(football_Players);
@@ -163,7 +163,7 @@ namespace FootballPlayers
                 }
 
                 // Ввод амплуа
-                Console.WriteLine("Введите амплуа [0 - вратарь, 1 - защитник, 2 - полузащитник, 3 - нападающий]");
+                Console.WriteLine("Введите амплуа [1 - вратарь, 2 - защитник, 3 - полузащитник, 4 - нападающий]");
                 int amplua;
                 bool isNum;
                 do
@@ -172,16 +172,16 @@ namespace FootballPlayers
                     isNum = int.TryParse(Console.ReadLine(), out amplua);
                     switch (amplua)
                     {
-                        case 0: // Вратарь
+                        case 1: // Вратарь
                             player.Role = Roles.Goalkeeper;
                             break;
-                        case 1: // Защитник
+                        case 2: // Защитник
                             player.Role = Roles.Quarterback;
                             break;
-                        case 2: // Полузащитник
+                        case 3: // Полузащитник
                             player.Role = Roles.Halfback;
                             break;
-                        case 3: // Нападающий
+                        case 4: // Нападающий
                             player.Role = Roles.Forward;
                             break;
                         default:
@@ -237,7 +237,7 @@ namespace FootballPlayers
             {
                 Console.WriteLine("|Фамилия\t||Дата рождения\t||Место рождения\t||Амплуа\t|" +
                         "|Количество игр||Количество желтых карт|");
-                foreach (Football_players player in players)
+                foreach (Football_players player in players)    // По футболистам из списка
                 {
                     Console.Write("|{0,-15}|", player.Surname);
                     Console.Write("|{0,-14}|", player.Birthday.ToString("MM/dd/yyyy"));
@@ -296,7 +296,7 @@ namespace FootballPlayers
             }
 
             /// <summary>
-            /// Вывод с применением фильтра
+            /// Вывод отфильтрованного списка
             /// </summary>
             /// <param name="players">Список футболистов</param>
             public static void OutFilterList(List<Football_players> players)
@@ -305,7 +305,7 @@ namespace FootballPlayers
                 List<Football_players> list = new List<Football_players>();
 
                 // Каждый футболист проверяется на удовлетворение условиям фильтра
-                foreach (var player in players)
+                foreach (var player in players) // По футболистам из списка
                 {
                     // Если удовлетворяет, добавляем в отфильтрованный список
                     if (player.isChecked())
@@ -317,8 +317,6 @@ namespace FootballPlayers
                 // Выводим отфильтрованный список на экран
                 OutFullList(list);
             }
-
-
         }
 
         /// <summary>
@@ -342,7 +340,9 @@ namespace FootballPlayers
             /// <return>Введённая дата</return>
             public DateTime? InputDate()
             {
+                // Дата
                 DateTime date;
+
                 // Ввод даты
                 string str = Console.ReadLine();
 
@@ -357,7 +357,7 @@ namespace FootballPlayers
                 }
                 catch
                 {
-                    Console.WriteLine("Неправильно ввели дату. Повторите ввод");
+                    Console.WriteLine("Неправильно ввели дату");
                     return null;
                 }
             }
@@ -372,26 +372,32 @@ namespace FootballPlayers
                 bool isNum;
                 try
                 {
+                    // Ввод амплуа
+                    string str = Console.ReadLine();
+
+                    // Если строка пустая, возвращаем значение null
+                    if (str == String.Empty) return null;
+
                     // Проверяем, является ли числом вводимая строка
-                    isNum = int.TryParse(Console.ReadLine(), out amplua);
+                    isNum = int.TryParse(str, out amplua);
                     switch (amplua)
                     {
-                        case 0: // Вратарь
+                        case 1: // Вратарь
                             return Roles.Goalkeeper;
-                        case 1: // Защитник
+                        case 2: // Защитник
                             return Roles.Quarterback;
-                        case 2: // Полузащитник
+                        case 3: // Полузащитник
                             return Roles.Halfback;
-                        case 3: // Нападающий
+                        case 4: // Нападающий
                             return Roles.Forward;
                         default:
-                            Console.WriteLine("Неправильно ввели амплуа. Повторите ввод:");
+                            Console.WriteLine("Неправильно ввели амплуа.");
                             return null;
                     }
                 }
                 catch
                 {
-                    Console.WriteLine("Неправильно ввели амплуа. Повторите ввод:");
+                    Console.WriteLine("Неправильно ввели амплуа.");
                     return null;
                 }               
             }
@@ -416,13 +422,13 @@ namespace FootballPlayers
                 }
                 catch
                 {
-                    Console.WriteLine("Неправильно ввели число. Повторите ввод");
+                    Console.WriteLine("Неправильно ввели число");
                     return null;
                 }
             }
 
             /// <summary>
-            /// Добавление фильтра
+            /// Ввод фильтра
             /// </summary>
             public void AddFilter()
             {
@@ -443,7 +449,7 @@ namespace FootballPlayers
                 F_PlaceOfBorn = Console.ReadLine();
 
                 // Ввод фильтра для роли 
-                Console.WriteLine("Введите фильтр для амплуа[0 - вратарь, 1 - защитник, 2 - полузащитник, 3 - нападающий]");
+                Console.WriteLine("Введите фильтр для амплуа[1 - вратарь, 2 - защитник, 3 - полузащитник, 4 - нападающий]");
                 F_Role = InputRole();
 
                 // Ввод нижней границы фильтра для количества игр
