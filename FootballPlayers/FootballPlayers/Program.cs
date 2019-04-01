@@ -17,6 +17,7 @@ namespace FootballPlayers
             Football_players.filter = new Football_players_filter();
             string ReadCh;
 
+            // Главное меню
             do
             {
                 // Вывод главного меню
@@ -185,7 +186,7 @@ namespace FootballPlayers
                             player.Role = Roles.Forward;
                             break;
                         default:
-                            Console.WriteLine("Неправильно ввели амплуа. Повторите ввод:");
+                            Console.WriteLine("Неправильно ввели амплуа.");
                             break;
                     }
                 } while (!isNum);
@@ -301,21 +302,25 @@ namespace FootballPlayers
             /// <param name="players">Список футболистов</param>
             public static void OutFilterList(List<Football_players> players)
             {
-                // Отфильтрованный список футболистов
-                List<Football_players> list = new List<Football_players>();
+                // Вывод оглавления списка
+                Console.WriteLine("|Фамилия\t||Дата рождения\t||Место рождения\t||Амплуа\t|" +
+                        "|Количество игр||Количество желтых карт|");
 
                 // Каждый футболист проверяется на удовлетворение условиям фильтра
                 foreach (var player in players) // По футболистам из списка
                 {
-                    // Если удовлетворяет, добавляем в отфильтрованный список
+                    // Если удовлетворяет, выводим на экран
                     if (player.isChecked())
                     {
-                        list.Add(player);
+                        Console.Write("|{0,-15}|", player.Surname);
+                        Console.Write("|{0,-14}|", player.Birthday.ToString("MM/dd/yyyy"));
+                        Console.Write("|{0,-22}|", player.PlaceOfBorn);
+                        Console.Write("|{0,-14}|", player.Role);
+                        Console.Write("|{0,-14}|", player.CountGames);
+                        Console.Write("|{0,-22}|", player.CountYellowLabel);
+                        Console.Write("\n");
                     }
                 }
-
-                // Выводим отфильтрованный список на экран
-                OutFullList(list);
             }
         }
 
@@ -357,7 +362,7 @@ namespace FootballPlayers
                 }
                 catch
                 {
-                    Console.WriteLine("Неправильно ввели дату");
+                    Console.WriteLine("Неправильно ввели дату.");
                     return null;
                 }
             }
