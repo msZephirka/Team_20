@@ -172,16 +172,16 @@ namespace FootballPlayers
                     isNum = int.TryParse(Console.ReadLine(), out amplua);
                     switch (amplua)
                     {
-                        case 0:
+                        case 0: // Вратарь
                             player.Role = Roles.Goalkeeper;
                             break;
-                        case 1:
+                        case 1: // Защитник
                             player.Role = Roles.Quarterback;
                             break;
-                        case 2:
+                        case 2: // Полузащитник
                             player.Role = Roles.Halfback;
                             break;
-                        case 3:
+                        case 3: // Нападающий
                             player.Role = Roles.Forward;
                             break;
                         default:
@@ -376,13 +376,13 @@ namespace FootballPlayers
                     isNum = int.TryParse(Console.ReadLine(), out amplua);
                     switch (amplua)
                     {
-                        case 0:
+                        case 0: // Вратарь
                             return Roles.Goalkeeper;
-                        case 1:
+                        case 1: // Защитник
                             return Roles.Quarterback;
-                        case 2:
+                        case 2: // Полузащитник
                             return Roles.Halfback;
-                        case 3:
+                        case 3: // Нападающий
                             return Roles.Forward;
                         default:
                             Console.WriteLine("Неправильно ввели амплуа. Повторите ввод:");
@@ -443,7 +443,7 @@ namespace FootballPlayers
                 F_PlaceOfBorn = Console.ReadLine();
 
                 // Ввод фильтра для роли 
-                Console.WriteLine("Введите фильтр для амплуа: ");
+                Console.WriteLine("Введите фильтр для амплуа[0 - вратарь, 1 - защитник, 2 - полузащитник, 3 - нападающий]");
                 F_Role = InputRole();
 
                 // Ввод нижней границы фильтра для количества игр
