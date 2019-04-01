@@ -168,6 +168,7 @@ namespace FootballPlayers
                 bool isNum;
                 do
                 {
+                    // Проверяем, является ли числом вводимая строка
                     isNum = int.TryParse(Console.ReadLine(), out amplua);
                     switch (amplua)
                     {
@@ -185,7 +186,6 @@ namespace FootballPlayers
                             break;
                         default:
                             Console.WriteLine("Неправильно ввели амплуа. Повторите ввод:");
-                            isNum = int.TryParse(Console.ReadLine(), out amplua);
                             break;
                     }
                 } while (!isNum);
@@ -372,6 +372,7 @@ namespace FootballPlayers
                 bool isNum;
                 try
                 {
+                    // Проверяем, является ли числом вводимая строка
                     isNum = int.TryParse(Console.ReadLine(), out amplua);
                     switch (amplua)
                     {
