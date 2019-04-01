@@ -261,11 +261,11 @@ namespace FootballPlayers
                     return false;
 
                 // Проверка даты рождения (min)
-                if ((filter.F_Birthday_min != null) && (this.Birthday > filter.F_Birthday_min))
+                if ((filter.F_Birthday_min != null) && (this.Birthday < filter.F_Birthday_min))
                     return false;
 
                 // Проверка даты рождения (max)
-                if ((filter.F_Birthday_max != null) && (this.Birthday < filter.F_Birthday_max))
+                if ((filter.F_Birthday_max != null) && (this.Birthday > filter.F_Birthday_max))
                     return false;
 
                 // Проверка места рождения
@@ -277,19 +277,19 @@ namespace FootballPlayers
                     return false;
 
                 // Проверка количества игр (min)
-                if ((filter.CountGames_min != null) && (this.CountGames > filter.CountGames_min))
+                if ((filter.CountGames_min != null) && (this.CountGames < filter.CountGames_min))
                     return false;
 
                 // Проверка количества игр (max)
-                if ((filter.CountGames_max != null) && (this.CountGames < filter.CountGames_max))
+                if ((filter.CountGames_max != null) && (this.CountGames > filter.CountGames_max))
                     return false;
 
                 // Проверка количетсва желтых карточек (min)
-                if ((filter.CountYellowLabel_min != null) && (this.CountYellowLabel > filter.CountYellowLabel_min))
+                if ((filter.CountYellowLabel_min != null) && (this.CountYellowLabel < filter.CountYellowLabel_min))
                     return false;
 
                 // Проверка количетсва желтых карточек (max)
-                if ((filter.CountYellowLabel_max != null) && (this.CountYellowLabel < filter.CountYellowLabel_max))
+                if ((filter.CountYellowLabel_max != null) && (this.CountYellowLabel > filter.CountYellowLabel_max))
                     return false;
 
                 // если поля удовлетворяют фильтру
