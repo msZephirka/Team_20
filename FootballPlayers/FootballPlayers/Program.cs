@@ -73,10 +73,10 @@ namespace FootballPlayers
         /// </summary>
         struct Football_players
         {
-            String Surname;         // Фамилия
-            DateTime Birthday;      // Дата рождения
-            String PlaceOfBorn;     // Место рождения
-            Roles Role;             // Амплуа
+            String Surname;          // Фамилия
+            DateTime Birthday;       // Дата рождения
+            String PlaceOfBorn;      // Место рождения
+            Roles Role;              // Амплуа
             uint CountGames;         // Количество игр
             uint CountYellowLabel;   // Количество желтых карточек
 
@@ -142,7 +142,7 @@ namespace FootballPlayers
                         int year = new DateTime(dt.Ticks).Year - 1;
                         if (year < 16 || year > 45)
                         {
-                            Console.WriteLine("Футболист должен быть старше 16 и младше 40. Повтрите ввод: ");
+                            Console.WriteLine("Футболист должен быть старше 16 и младше 45. Повтрите ввод: ");
                             str = Console.ReadLine();
                         }
                         player.Birthday = date;
@@ -231,22 +231,34 @@ namespace FootballPlayers
             }
 
             /// <summary>
+            /// Вывод одного футболиста
+            /// </summary>
+            /// <param name="player">Футболист</param>
+            public static void OutFootballPlayer(Football_players player)
+            {                
+                Console.Write("|{0,-15}|", player.Surname);
+                Console.Write("|{0,-14}|", player.Birthday.ToString("MM/dd/yyyy"));
+                Console.Write("|{0,-22}|", player.PlaceOfBorn);
+                Console.Write("|{0,-14}|", player.Role);
+                Console.Write("|{0,-14}|", player.CountGames);
+                Console.Write("|{0,-22}|", player.CountYellowLabel);
+                Console.Write("\n");
+            }
+
+            /// <summary>
             /// Вывод полного списка
             /// </summary>
             /// <param name="players">Список футболистов</param>
             public static void OutFullList(List<Football_players> players)
             {
+                // Вывод оглавления списка
                 Console.WriteLine("|Фамилия\t||Дата рождения\t||Место рождения\t||Амплуа\t|" +
                         "|Количество игр||Количество желтых карт|");
+
+                // Вывод списка футболистов
                 foreach (Football_players player in players)    // По футболистам из списка
                 {
-                    Console.Write("|{0,-15}|", player.Surname);
-                    Console.Write("|{0,-14}|", player.Birthday.ToString("MM/dd/yyyy"));
-                    Console.Write("|{0,-22}|", player.PlaceOfBorn);
-                    Console.Write("|{0,-14}|", player.Role);
-                    Console.Write("|{0,-14}|", player.CountGames);
-                    Console.Write("|{0,-22}|", player.CountYellowLabel);
-                    Console.Write("\n");
+                    OutFootballPlayer(player);
                 }
             }
 
@@ -312,13 +324,7 @@ namespace FootballPlayers
                     // Если удовлетворяет, выводим на экран
                     if (player.isChecked())
                     {
-                        Console.Write("|{0,-15}|", player.Surname);
-                        Console.Write("|{0,-14}|", player.Birthday.ToString("MM/dd/yyyy"));
-                        Console.Write("|{0,-22}|", player.PlaceOfBorn);
-                        Console.Write("|{0,-14}|", player.Role);
-                        Console.Write("|{0,-14}|", player.CountGames);
-                        Console.Write("|{0,-22}|", player.CountYellowLabel);
-                        Console.Write("\n");
+                        OutFootballPlayer(player);
                     }
                 }
             }
@@ -329,10 +335,10 @@ namespace FootballPlayers
         /// </summary>
         struct Football_players_filter
         {
-            public String F_Surname;               //Фильтр по фамилии
+            public String F_Surname;                //Фильтр по фамилии
             public DateTime? F_Birthday_min;        //Фильр по дате рождения (min)
             public DateTime? F_Birthday_max;        //Фильр по дате рождения (max)
-            public String F_PlaceOfBorn;           //Фильтр по месту рождения
+            public String F_PlaceOfBorn;            //Фильтр по месту рождения
             public Roles? F_Role;                   //Фильтр по амплуа
             public int? CountGames_min;             //Фильтр по количеству игр (min)
             public int? CountGames_max;             //Фильтр по количеству игр (max)
@@ -481,9 +487,9 @@ namespace FootballPlayers
         enum Roles
         {
             Goalkeeper = 1,     //вратарь
-            Quarterback,    //защитник
-            Halfback,       //полузащитник
-            Forward         //нападающий
+            Quarterback,        //защитник
+            Halfback,           //полузащитник
+            Forward             //нападающий
         };
 
     }
